@@ -1,0 +1,2990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduGuide — You Don't Have to Decide Alone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --cream: #ffffff;
+            --warm-white: #fffef9;
+            --ink: #1a1612;
+            --ink-soft: #3d3530;
+            --ink-muted: #7a6f66;
+            --accent: #274896;
+            --accent-light: #DCE6FF;
+            --accent-pale: #F3F6FF;
+            --gold: #e43441;
+            --gold-light: #f5e8d0;
+            --border: #e8e0d4;
+            --border-light: #f0ebe2;
+            --shadow: rgba(26, 22, 18, 0.08);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: white !important;
+            color: var(--ink);
+            overflow-x: hidden !important;
+        }
+
+        .container {
+            max-width: 95%;
+        }
+
+        /* ── NOISE TEXTURE OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.4;
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: rgba(250, 248, 243, 0);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 32px var(--shadow);
+        }
+
+        .navbar-brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--ink) !important;
+            letter-spacing: -0.02em;
+        }
+
+        .navbar-brand span {
+            color: var(--accent);
+        }
+
+        .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: black !important;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.9rem !important;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            right: 50%;
+            height: 1.5px;
+            background: var(--accent);
+            transition: left 0.25s ease, right 0.25s ease;
+        }
+
+        .nav-link:hover::after {
+            left: 0.9rem;
+            right: 0.9rem;
+        }
+
+        .btn-nav-cta {
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: var(--gold);
+            color: var(--cream) !important;
+            border-radius: 2px;
+            padding: 0.5rem 1.3rem !important;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .btn-nav-cta:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .navbar-toggler {
+            border: 1px solid var(--border);
+            border-radius: 2px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(40deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 60%),
+                url('media/Home_Banner_03.webp') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 0 1rem;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.2s ease forwards;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 32px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.35s ease forwards;
+        }
+
+        .hero-headline em {
+            font-style: italic;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .hero-headline em::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-light);
+            z-index: -1;
+        }
+
+        .hero-subhead {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--ink);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.5s ease forwards;
+        }
+
+        .hero-body {
+            font-size: 1rem;
+            color: var(--ink-muted);
+            line-height: 1.8;
+            max-width: 550px;
+            margin-bottom: 2.2rem;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.65s ease forwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.8s ease forwards;
+        }
+
+        .stat-item {}
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .stat-num span {
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-top: 0.2rem;
+        }
+
+        .stat-divider {
+            width: 1px;
+            background: var(--border);
+            align-self: stretch;
+        }
+
+        /* ── LEAD FORM ── */
+        .form-card {
+            background: rgba(255, 254, 249, 0.7);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem 2rem 0.5rem 2rem;
+            box-shadow: 0 8px 48px var(--shadow), 0 1px 0 #fff inset;
+            position: relative;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s ease forwards;
+        }
+
+        /* .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+          
+        } */
+
+        .form-card-eyebrow {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.48rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-bottom: 0.35rem;
+        }
+
+        .form-control,
+        .form-select {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--ink);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            padding: 0.65rem 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background: var(--warm-white);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(200, 82, 42, 0.1);
+            color: var(--ink);
+        }
+
+        .form-control::placeholder {
+            color: var(--ink-muted);
+            font-size: 0.88rem;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--cream);
+            border: none;
+            border-radius: 2px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.85rem 2rem;
+            width: 100%;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.06));
+        }
+
+        .btn-submit:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(200, 82, 42, 0.3);
+            color: #fff;
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-privacy {
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            text-align: center;
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .form-privacy i {
+            color: var(--accent);
+        }
+
+        /* ── SECTION SHARED ── */
+        section {
+            padding: 2rem 0;
+        }
+
+        .section-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .section-body {
+            font-size: 1rem;
+            color: var(--ink-muted);
+            line-height: 1.8;
+            max-width: 100%;
+        }
+
+        /* ── WHO WE ARE ── */
+        #who {
+            background: var(--cream);
+            position: relative;
+        }
+
+        .who-img-wrap {
+            position: relative;
+            padding: 1.5rem;
+        }
+
+        .who-img-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 80%;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .who-img-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80%;
+            height: 80%;
+            background: var(--accent-pale);
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .who-img-inner {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--gold-light) 100%);
+            border-radius: 2px;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .who-img-inner svg {
+            width: 80px;
+            height: 80px;
+            opacity: 0.3;
+        }
+
+        .who-features {
+            margin-top: 2rem;
+        }
+
+        .who-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .who-feature-icon {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: var(--warm-white);
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .who-feature-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 0.2rem;
+        }
+
+        .who-feature-text {
+            font-size: 0.88rem;
+            color: var(--ink-muted);
+            line-height: 1.7;
+        }
+
+        /* ── WHAT WE DO ── */
+        #what {
+            background: var(--warm-white);
+        }
+
+        .what-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .what-card {
+            background: var(--warm-white);
+            padding: 2.5rem 2rem;
+            position: relative;
+            transition: background 0.25s;
+        }
+
+        .what-card:hover {
+            background: var(--accent-pale);
+        }
+
+        .what-card-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--border);
+            line-height: 1;
+            margin-bottom: 1.2rem;
+            transition: color 0.25s;
+        }
+
+        .what-card:hover .what-card-num {
+            color: var(--accent-light);
+        }
+
+        .what-card-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.15rem;
+            color: var(--ink);
+            margin-bottom: 0.7rem;
+        }
+
+        .what-card-text {
+            font-size: 0.88rem;
+            color: var(--ink-muted);
+            line-height: 1.75;
+        }
+
+        /* ── SERVICES ── */
+        #services {
+            background: var(--cream);
+        }
+
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .my-3 {
+            display: grid;
+            grid-template-columns: 66px 1fr auto;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-radius: 20px;
+
+            text-decoration: none;
+            transition: background 0.2s;
+            cursor: pointer;
+            background: linear-gradient(to right, var(--accent), rgba(217, 58, 58, 0));
+        }
+
+        .service-item:first-child {
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* .service-item:hover .service-title {
+            color: var(--gold);
+        } */
+
+        .service-item:hover .service-arrow {
+            transform: translateX(4px);
+            color: var(--accent);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border: 1px solid var(--border);
+            /* border-radius: 50px; */
+            background: var(--warm-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--gold);
+            flex-shrink: 0;
+            margin-left: 20px;
+            margin-right: 20px;
+            clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+        }
+
+        .service-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+
+            color: var(--cream);
+            margin-bottom: 0.2rem;
+            transition: color 0.2s;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: black;
+            line-height: 1.6;
+            width: 500px;
+
+        }
+
+        .service-arrow {
+            color: var(--ink-muted);
+            font-size: 1.2rem;
+            transition: transform 0.2s, color 0.2s;
+            flex-shrink: 0;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--cream);
+            color: rgba(0, 0, 0, 0.6);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand span {
+            color: var(--accent);
+        }
+
+        .footer-tagline {
+            font-size: 0.82rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            margin-left: 1.1rem;
+        }
+
+        .footer-divider {
+            border-color: rgba(0, 0, 0, 0.1);
+            margin: 2rem 0 1.5rem;
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+        }
+
+        .footer-links a {
+            color: rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            font-size: 0.78rem;
+            margin-left: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ── HORIZONTAL RULE STYLED ── */
+        .hr-fancy {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 991px) {
+            .form-card {
+                margin-top: 3rem;
+            }
+
+            .hero-stats {
+                gap: 1.2rem;
+            }
+
+            .stat-divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 575px) {
+            section {
+                padding: 4rem 0;
+            }
+
+            .what-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-item {
+                grid-template-columns: 42px 1fr auto;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ NAVBAR ══ -->
+    <nav class="navbar navbar-expand-lg" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="media/Leantech_logo.svg" alt="EduGuide" style="height: 70px; margin-right: 0.5rem;"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav mx-auto gap-1">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#who">Who We Are</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#what">What We Do</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Our Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#institutions">Institutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#stories">Success Stories</a></li>
+                </ul>
+                <a class="nav-link btn-nav-cta ms-2" href="#hero">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══ HERO ══ -->
+    <section id="hero">
+
+
+        <div class="container">
+            <div class="row align-items-center g-5">
+
+                <!-- LEFT copy -->
+                <div class="col-lg-6">
+                    <div class="hero-eyebrow">College Admissions Guidance</div>
+                    <h1 class="hero-headline">
+                        You Don't Have<br>to Decide <em>Alone</em>
+                    </h1>
+                    <p class="hero-subhead">
+                        1000+ Colleges. Multiple Rounds of Counselling.<br>Only One You. Not anymore.
+                    </p>
+                    <p class="hero-body">
+                        Every student deserves the right guidance when choosing their college and career path.
+                        Because every superhero needs a sidekick.
+
+                    </p>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-num">30<span>+</span></div>
+                            <div class="stat-label"> Years of Consistent<br> Service</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-num">5,00,000<span>+</span></div>
+                            <div class="stat-label">Successful Admissions</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-num">1,000<span>+</span></div>
+                            <div class="stat-label">Partner Institutions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT form -->
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="form-card">
+                        <div class="form-card-eyebrow">Start your Journey with us</div>
+                        <h2 class="form-card-title">Take The First Step Towards Your Future</h2>
+
+                        <form id="leadForm" novalidate>
+                            <div class="row gy-0 gx-2">
+                                <div class="col-12">
+                                    <label class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" placeholder="Your full name" required />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" class="form-control" placeholder="you@email.com" required />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Phone *</label>
+                                    <input type="tel" class="form-control" placeholder="+91 XXXXX XXXXX" required />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Location *</label>
+                                    <input type="text" class="form-control" placeholder="City, State" required />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Select Course *</label>
+                                    <select class="form-select" required>
+                                        <option value="" disabled selected>Choose course</option>
+                                        <option>Engineering (B.Tech)</option>
+                                        <option>Medicine (MBBS)</option>
+                                        <option>Management (BBA/MBA)</option>
+                                        <option>Law (LLB)</option>
+                                        <option>Design & Architecture</option>
+                                        <option>Arts & Humanities</option>
+                                        <option>Science (B.Sc)</option>
+                                        <option>Commerce (B.Com)</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Message <span
+                                            style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;">(Optional)</span></label>
+                                    <textarea class="form-control"
+                                        placeholder="Tell us a bit about your goals…"></textarea>
+                                </div>
+                                <div class="col-12 mt-1">
+                                    <button type="submit" class="btn-submit" id="submitBtn">
+                                        Start My Journey &nbsp; <i class="bi bi-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <p class="form-privacy"><i class="bi bi-shield-check"></i> &nbsp; Your information is 100%
+                            secure. We never share your data.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ WHO WE ARE ══ -->
+    <section id="who">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal">
+                    <div class="who-img-wrap">
+                        <div class="who-img-inner">
+                            <img src="media/WhatsApp Image 2026-03-04 at 7.22.03 PM.jpeg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 ">
+                    <div class="reveal reveal-delay-1">
+                        <div class="section-eyebrow">Who We Are</div>
+                        <h2 class="section-title">Experts Who've <em>Been There</em></h2>
+                        <p class="section-body">
+                            Every year, over 20 lakh students fight for a place in India’s top medical colleges. More
+                            than 10 lakh students pray they land a seat in a top engineering college. Your competition
+                            is not just the numbers, but the process of getting there. Multiple rounds of counselling,
+                            unpredictable cut-offs, and piles of paperwork. One wrong preference on a form, one missed
+                            deadline, and you may miss out on your dream.<br>
+
+                            No matter what career options after 12th science you are looking for, whether you are aiming
+                            for a top-tier Medical seat, or a premier engineering program, making the right choice
+                            demands getting rid of your uncertainty.<br>
+
+                            That’s where Learntech comes to the rescue. We are a dedicated family of counsellors and
+                            ed-tech professionals turning career counselling for students into a clear, strategic
+                            roadmap which leads to success.
+
+                        </p>
+                    </div>
+                    <!-- <div class="who-features reveal reveal-delay-2">
+                        <div class="who-feature">
+                            <div class="who-feature-icon"><i class="bi bi-mortarboard"></i></div>
+                            <div>
+                                <div class="who-feature-title">Certified Counsellors</div>
+                                <div class="who-feature-text">Our counsellors hold nationally recognised certifications
+                                    with years of hands-on admissions experience.</div>
+                            </div>
+                        </div>
+                        <div class="who-feature">
+                            <div class="who-feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                            <div>
+                                <div class="who-feature-title">Data-Driven Matching</div>
+                                <div class="who-feature-text">We use real admissions data to match each student with the
+                                    institutions where they are most likely to thrive.</div>
+                            </div>
+                        </div>
+                        <div class="who-feature">
+                            <div class="who-feature-icon"><i class="bi bi-heart"></i></div>
+                            <div>
+                                <div class="who-feature-title">Genuinely Student-First</div>
+                                <div class="who-feature-text">No hidden agendas. No institute tie-ins that compromise
+                                    your interest. Just honest, personalised guidance.</div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ WHAT WE DO ══ -->
+    <section id="what">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 reveal">
+                    <div class="section-eyebrow">What We Do</div>
+                    <h2 class="section-title">Turning Confusion Into <em>Clarity</em></h2>
+                    <p class="section-body">
+                        Since 1994, LearnTech has acted as the operational backbone for students navigating higher
+                        education. We specialize in guiding students through every step of their professional college
+                        admission journey. By handling the complex operational requirements of admissions, counseling,
+                        and financing, we empower students to focus on their goals while we secure the path while we
+                        handle the rest.
+
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="what-grid reveal reveal-delay-1">
+                <div class="what-card">
+                    <div class="what-card-num">01</div>
+                    <div class="what-card-title">Profile Assessment</div>
+                    <div class="what-card-text">We analyse your academics, interests, and aspirations to build a clear
+                        picture of where you stand and where you can go.</div>
+                </div>
+                <div class="what-card">
+                    <div class="what-card-num">02</div>
+                    <div class="what-card-title">College Shortlisting</div>
+                    <div class="what-card-text">Using live cutoff data across 1000+ institutions, we build a balanced
+                        list of dream, target, and safe colleges — tailored for you.</div>
+                </div>
+                <div class="what-card">
+                    <div class="what-card-num">03</div>
+                    <div class="what-card-title">Counselling Support</div>
+                    <div class="what-card-text">We guide you through every round of state and national counselling,
+                        ensuring you never miss a deadline or opportunity.</div>
+                </div>
+                <div class="what-card">
+                    <div class="what-card-num">04</div>
+                    <div class="what-card-title">Post-Admission Help</div>
+                    <div class="what-card-text">Admission secured? We continue supporting you with document
+                        verification, hostel queries, and onboarding guidance.</div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- ══ SERVICES ══ -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 reveal">
+                    <div class="section-eyebrow">Our Services</div>
+                    <h2 class="section-title">Everything You <em>Need</em>, In One Place</h2>
+                    <!-- <p class="section-body">Comprehensive support at every stage of your admissions journey — from
+                        exploration to enrollment.</p> -->
+                </div>
+            </div>
+
+            <div class="service-list reveal reveal-delay-1">
+                <div class="service-item my-3">
+                    <div class="service-icon"><i class="bi bi-person-lines-fill"></i></div>
+                    <div>
+                        <div class="service-title">Career & Admission Strategy</div>
+                        <div class="service-desc">Success in college admissions is never accidental. It comes from
+                            understanding a student’s strengths and navigating the admission process with the right
+                            strategy. By analysing aptitude, trends, and opportunities, we help students choose the
+                            courses and colleges where they have the strongest chance of securing a seat.
+                        </div>
+                    </div>
+                    <i class="bi bi-arrow-right service-arrow"></i>
+                </div>
+                <div class="service-item my-3">
+                    <div class="service-icon"><i class="bi bi-building"></i></div>
+                    <div>
+                        <div class="service-title">Seat Reservation Services</div>
+                        <div class="service-desc">Admissions can be unpredictable. To reduce this uncertainty, we help
+                            students secure seats early through formal reservation pathways, ensuring confirmed
+                            placements in preferred institutions before the peak admission rush begins.
+                        </div>
+                    </div>
+                    <i class="bi bi-arrow-right service-arrow"></i>
+                </div>
+                <div class="service-item my-3">
+                    <div class="service-icon"><i class="bi bi-file-earmark-text"></i></div>
+                    <div>
+                        <div class="service-title">Institutional Liaison & Campus Tours</div>
+                        <div class="service-desc">We arrange college campus tours and interactions with college
+                            leadership, enabling students and parents to evaluate faculty, infrastructure, and campus
+                            facilities before final enrollment.
+
+                        </div>
+                    </div>
+                    <i class="bi bi-arrow-right service-arrow"></i>
+                </div>
+                <div class="service-item my-3">
+                    <div class="service-icon"><i class="bi bi-bank2"></i></div>
+                    <div>
+                        <div class="service-title">Financial Planning & Loan Assistance
+                        </div>
+                        <div class="service-desc">We provide education loan assistance and help with scholarship
+                            applications, simplify documentation and help students navigate the approval process with
+                            trusted financial partners.
+                        </div>
+                    </div>
+                    <i class="bi bi-arrow-right service-arrow"></i>
+                </div>
+                <div class="service-item my-3">
+                    <div class="service-icon"><i class="bi bi-airplane-engines-fill"></i></div>
+                    <div>
+                        <div class="service-title">NRI Admission Consulting
+                        </div>
+                        <div class="service-desc">Dedicated support for NRI students navigating the Indian education
+                            system, focusing on quota compliance, management quota admission, documentation, and
+                            seamless transition logistics for NRI admission in India.
+                        </div>
+                    </div>
+                    <i class="bi bi-arrow-right service-arrow"></i>
+                </div>
+                <div class="service-item my-3">
+                    <div class="service-icon"><i class="bi bi-globe2"></i></div>
+                    <div>
+                        <div class="service-title">Global Admission Consulting
+                        </div>
+                        <div class="service-desc">We support students with comprehensive global admission guidance
+                            For international admissions in the UK, USA, and Europe—from university shortlisting and
+                            application preparation to visa processing and pre-departure guidance.
+
+                        </div>
+                    </div>
+                    <i class="bi bi-arrow-right service-arrow"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <section id="College-swiper">
+        <div class="heading-wrap">
+            <div class="eyebrow">Institutions</div>
+            <h1>Our <em>Partner</em> Colleges</h1>
+            <!-- <p class="sub">Trusted relationships with leading institutions across India.</p> -->
+        </div>
+
+        <div class="carousel-wrap">
+
+            <button class="arrow arrow-prev" id="btnPrev"><i class="bi bi-arrow-left"></i></button>
+            <button class="arrow arrow-next" id="btnNext"><i class="bi bi-arrow-right"></i></button>
+
+            <div class="track-outer" id="trackOuter">
+                <div class="track" id="track">
+
+                    <!-- 1 S-VYASA Bangalore -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#fdf0e4,#f5ddb8);">
+
+                            </div>
+                            <img src="college images/S-VYASA University, Bangalore.webp" alt="S-VYASA University"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(200,82,42,0.18);color:#fff;border-color:rgba(200,82,42,0.4);">
+                                Yoga &amp; Wellness</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">S-VYASA University,<br> Bangalore</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 2 S-VYASA Kerala -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#e4f5e8,#c8ecd0);">
+
+                            </div>
+                            <img src="college images/S-VYASA University Kerala (upcoming campus).webp"
+                                alt="S-VYASA Kerala" onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(42,122,68,0.2);color:#fff;border-color:rgba(42,122,68,0.4);">
+                                Upcoming</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Kerala</div>
+                            <div class="card-name">S-VYASA University<br> Kerala (upcoming campus)</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 3 S-VYASA Yoga Campus -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#f0e4f8,#e4ccf0);">
+
+                            </div>
+                            <img src="college images/S-VYASA University (Yoga Campus).webp" alt="S-VYASA Yoga Campus"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
+                                Yoga Campus</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">S-VYASA University<br> (Yoga Campus)</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 1 S-VYASA Bangalore -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#fdf0e4,#f5ddb8);">
+
+                            </div>
+                            <img src="college images/Yenepoya University, Bangalore.webp" alt="S-VYASA University"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(200,82,42,0.18);color:#fff;border-color:rgba(200,82,42,0.4);">
+                                Yoga &amp; Wellness</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">Yenepoya University,<br> Bangalore </div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 2 S-VYASA Kerala -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#e4f5e8,#c8ecd0);">
+
+                            </div>
+                            <img src="college images/Srinivas University, Mangalore.webp" alt="S-VYASA Kerala"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(42,122,68,0.2);color:#fff;border-color:rgba(42,122,68,0.4);">
+                                Upcoming</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Kerala</div>
+                            <div class="card-name">Srinivas University,<br> Mangalore</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 3 S-VYASA Yoga Campus -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#f0e4f8,#e4ccf0);">
+
+                            </div>
+                            <img src="college images/Chinmaya Vishwa Vidyapeeth (CVV), Kochi, Ker.webp"
+                                alt="S-VYASA Yoga Campus" onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
+                                Yoga Campus</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">Chinmaya Vishwa Vidyapeeth (CVV), Kochi, Kerala</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 1 S-VYASA Bangalore -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#fdf0e4,#f5ddb8);">
+
+                            </div>
+                            <img src="college images/Sri Devaraj URS, Kolar.webp" alt="S-VYASA University"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(200,82,42,0.18);color:#fff;border-color:rgba(200,82,42,0.4);">
+                                Yoga &amp; Wellness</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">Sri Devaraj URS,<br> Kolar</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 2 S-VYASA Kerala -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#e4f5e8,#c8ecd0);">
+
+                            </div>
+                            <img src="college images/Sri Venkateshwara Dental College, Bangalore.webp"
+                                alt="S-VYASA Kerala" onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(42,122,68,0.2);color:#fff;border-color:rgba(42,122,68,0.4);">
+                                Upcoming</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Kerala</div>
+                            <div class="card-name">Sri Venkateshwara Dental College, Bangalore</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 3 S-VYASA Yoga Campus -->
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#f0e4f8,#e4ccf0);">
+
+                            </div>
+                            <img src="college images/BGS and SJB Group of Institutions, Bangalore.webp"
+                                alt="S-VYASA Yoga Campus" onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
+                                Yoga Campus</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">BGS and SJB Group of Institutions, Bangalore</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#f0e4f8,#e4ccf0);">
+
+                            </div>
+                            <img src="college images/RV University, Mysuru.webp" alt="S-VYASA Yoga Campus"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
+                                Yoga Campus</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">RV University, Mysuru</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#f0e4f8,#e4ccf0);">
+
+                            </div>
+                            <img src="college images/Sri Sri Ayurveda, Bengaluru.webp" alt="S-VYASA Yoga Campus"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
+                                Yoga Campus</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">Sri Sri Ayurveda,<br> Bengaluru</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#f0e4f8,#e4ccf0);">
+
+                            </div>
+                            <img src="college images/GIBS Business School, Bangalore.webp" alt="S-VYASA Yoga Campus"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
+                                Yoga Campus</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">GIBS Business School,<br> Bangalore</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="card-placeholder" style="background:linear-gradient(145deg,#f0e4f8,#e4ccf0);">
+
+                            </div>
+                            <img src="college images/Alliance Ascent College, Bangalore.webp" alt="S-VYASA Yoga Campus"
+                                onerror="this.classList.add('errored')" />
+                            <div class="card-badge"
+                                style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
+                                Yoga Campus</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
+                            <div class="card-name">Alliance Ascent College,<br> Bangalore</div>
+                            <a href="#" class="card-apply">Apply Now <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+                </div><!-- /track -->
+            </div><!-- /track-outer -->
+
+            <div class="dots" id="dots"></div>
+
+        </div><!-- /carousel-wrap -->
+    </section>
+    <style>
+        /* HEADING */
+        .heading-wrap {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            padding: 0 1.5rem;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent) !important;
+            margin-bottom: 0.9rem;
+        }
+
+        .eyebrow::before,
+        .eyebrow::after {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .sub {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* CAROUSEL */
+        .carousel-wrap {
+            position: relative;
+            width: 100%;
+        }
+
+        .carousel-wrap::before,
+        .carousel-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 60px;
+            width: 90px;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .carousel-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, var(--cream), transparent);
+        }
+
+        .carousel-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, var(--cream), transparent);
+        }
+
+        .track-outer {
+            overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .track-outer:active {
+            cursor: grabbing;
+        }
+
+        .track {
+            display: flex;
+            gap: 1.4rem;
+            padding: 1.2rem 2.5rem 2rem;
+            transition: transform 0.52s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        /* CARD */
+        .card {
+            flex: 0 0 calc(25% - 1.1rem);
+            min-width: 220px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 56px rgba(26, 22, 18, 0.15);
+        }
+
+        /* IMAGE */
+        .card-img {
+            height: 230px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            position: absolute;
+            inset: 0;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.06);
+        }
+
+        .card-img img.errored {
+            display: none;
+        }
+
+        /* SVG placeholder always behind image */
+        .card-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* dark gradient overlay */
+        .card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 55%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* BADGE */
+        .card-badge {
+            position: absolute;
+            top: 0.85rem;
+            left: 0.85rem;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.22rem 0.65rem;
+            border-radius: 2px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid;
+            z-index: 3;
+        }
+
+        /* BODY */
+        .card-body {
+            padding: 1.2rem 1.3rem 1.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            flex: 1;
+            background: linear-gradient(to top, #f8fbff 80%, rgba(17, 0, 255, 0) 100%);
+            position: relative;
+            margin-top: -48px;
+            z-index: 3;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .card-loc {
+            font-size: 0.7rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-loc i {
+            color: var(--accent);
+            font-size: 0.72rem;
+        }
+
+        .card-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink-soft);
+            line-height: 1.35;
+            flex: 1;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .card-apply {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.80rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.62rem 0.7rem;
+            border-radius: 4px;
+            transition: background 0.2s, gap 0.2s, transform 0.15s;
+        }
+
+        .card-apply:hover {
+            background: var(--accent);
+            gap: 0.75rem;
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .card-apply i {
+            font-size: 0.78rem;
+        }
+
+        /* ARROWS */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(calc(-50% - 30px));
+            z-index: 5;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--ink);
+            transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .arrow:hover {
+            background: rgba(39, 72, 150, 0.25);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(39, 72, 150, 0.25);
+            transform: translateY(calc(-50% - 30px)) scale(1.1);
+        }
+
+        .arrow-prev {
+            left: 2rem;
+        }
+
+        .arrow-next {
+            right: 2rem;
+        }
+
+        /* DOTS */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.45rem;
+            margin-top: 0.5rem;
+        }
+
+        .dot {
+            width: 6px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--border);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.25s, width 0.25s, border-radius 0.25s;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            width: 24px;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 700px) {
+            .card {
+                flex: 0 0 calc(50% - 0.7rem);
+                min-width: 180px;
+            }
+
+            .card-img {
+                height: 155px;
+            }
+
+            .arrow {
+                width: 38px;
+                height: 38px;
+                font-size: 0.85rem;
+            }
+
+            .carousel-wrap::before,
+            .carousel-wrap::after {
+                width: 36px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .card {
+                flex: 0 0 85vw;
+            }
+        }
+    </style>
+    <!-- ======================================================================================================================================================================== -->
+
+
+
+
+
+    <style>
+        /* ── CAROUSEL ── */
+        .tc-wrap {
+            max-width: 1360px;
+            margin: 0 auto;
+            position: relative;
+            animation: fadeUp .8s .15s ease both;
+        }
+
+        /* the three cards sit in a relative container — active is big, sides are peeking */
+        .tc-viewport {
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .tc-track {
+            display: flex;
+            gap: 16px;
+            transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+            will-change: transform;
+        }
+
+        /* ── CARD ── */
+        .tc-card {
+            flex: 0 0 calc(100% - 32px);
+            /* full width minus gap allowance */
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 380px;
+            opacity: .4;
+            transform: scale(.96);
+            transition: opacity .5s ease, transform .5s ease, box-shadow .5s ease;
+        }
+
+        .tc-card.active {
+            opacity: 1;
+            transform: scale(1);
+            box-shadow: 0 12px 60px rgba(26, 22, 18, 0.13);
+        }
+
+        /* top accent bar */
+        .tc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            opacity: 0;
+            transition: opacity .5s ease;
+            z-index: 2;
+        }
+
+        .tc-card {
+            position: relative;
+        }
+
+        .tc-card.active::before {
+            opacity: 1;
+        }
+
+        /* VIDEO SIDE */
+        .tc-video {
+            position: relative;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .tc-video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .tc-num {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            z-index: 3;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .15em;
+            color: rgba(255, 255, 255, .6);
+            background: rgba(0, 0, 0, .4);
+            backdrop-filter: blur(6px);
+            padding: 3px 9px;
+            border-radius: 4px;
+        }
+
+        /* TEXT SIDE */
+        .tc-body {
+            padding: clamp(22px, 3vw, 36px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            background: linear-gradient(145deg, var(--warm-white) 55%, var(--accent-pale));
+        }
+
+        .tc-stars {
+            display: flex;
+            gap: 3px;
+        }
+
+        .tc-stars svg {
+            width: 12px;
+            height: 12px;
+            fill: #e9b12a;
+        }
+
+        .tc-quote {
+            font-family: 'DM Serif Display', serif;
+            font-style: italic;
+            font-size: clamp(14px, 1.8vw, 17px);
+            line-height: 1.72;
+            color: var(--ink-soft);
+            flex: 1;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .tc-quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 3px;
+            bottom: 3px;
+            width: 2px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, var(--accent), var(--accent-light));
+        }
+
+        .tc-divider {
+            height: 1px;
+            background: var(--border-light);
+        }
+
+        .tc-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tc-ava {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 12px;
+            letter-spacing: .04em;
+            border: 1px solid var(--border);
+        }
+
+        .tc-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .tc-role {
+            font-size: 11px;
+            color: var(--ink-muted);
+            margin-top: 2px;
+        }
+
+        /* ── CONTROLS ── */
+        .tc-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 28px;
+            animation: fadeUp .7s .3s ease both;
+        }
+
+        .tc-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--warm-white);
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: background .2s, color .2s, border-color .2s, transform .2s;
+        }
+
+        .tc-arrow:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            transform: scale(1.08);
+        }
+
+        .tc-arrow:active {
+            transform: scale(.95);
+        }
+
+        .tc-arrow svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .tc-dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .tc-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            cursor: pointer;
+            transition: all .35s cubic-bezier(.4, 0, .2, 1);
+            border: none;
+            padding: 0;
+        }
+
+        .tc-dot.active {
+            width: 22px;
+            background: var(--accent);
+        }
+
+        /* progress bar */
+        .tc-progress {
+            width: 80px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--border);
+            overflow: hidden;
+        }
+
+        .tc-progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            border-radius: 2px;
+            transition: width .08s linear;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:680px) {
+            .tc-card {
+                grid-template-columns: 1fr;
+                grid-template-rows: 220px 1fr;
+                min-height: auto;
+            }
+
+            .tc-video {
+                height: 220px;
+                position: relative;
+            }
+
+            .tc-body {
+                padding: 20px 18px 22px;
+            }
+        }
+
+        @media(max-width:400px) {
+            .tc-progress {
+                display: none;
+            }
+        }
+    </style>
+
+
+
+    <div class="text-center">
+        <div class="eyebrow">Testimonials</div>
+        <h1>Success <em>Stories</em> </h1>
+    </div>
+
+
+    <!-- CAROUSEL -->
+    <div class="tc-wrap ">
+        <div class="tc-viewport p-5">
+            <div class="tc-track" id="tcTrack">
+
+                <!-- SLIDE 1 -->
+                <div class="tc-card active">
+                    <div class="tc-video">
+                        <div class="tc-num">01 / 05</div>
+                        <iframe src="https://www.youtube.com/embed/5aUW_0wz018?rel=0&modestbranding=1"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-stars">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                        </div>
+                        <p class="tc-quote">"Hi! My name is Sakshi. I live in Bangalore. I am pursuing BCA with
+                            specialisation in AI, ML and robotics from S-VYASA deemed to be university. The environment
+                            and surroundings are very good. The college is located in an IT tech park consisting of tech
+                            giants. It is pretty. The internship is compulsory here which will be beneficial for us in
+                            the future.
+
+                            "</p>
+                        <div class="tc-divider"></div>
+                        <div class="tc-author">
+                            <div class="tc-ava" style="background:var(--accent-pale);color:var(--accent);">SP</div>
+                            <div>
+                                <div class="tc-name">Sakshi S Peddarpeth's</div>
+                                <div class="tc-role">Student</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="tc-card">
+                    <div class="tc-video">
+                        <div class="tc-num">02 / 05</div>
+                        <iframe src="https://www.youtube.com/embed/m8TmsutwywA?rel=0&modestbranding=1"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-stars">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                        </div>
+                        <p class="tc-quote">"Hi, My name is Varun and I got my admission into SRM Medical College, with
+                            the help of Learntech consultancy. The Learntech Institute motivated us to go to the SRM and
+                            physically we have seen that it’s one of the best colleges as far as the colleges I have
+                            visited so far and we are really happy that we got admission through Learntech.
+                            "</p>
+                        <div class="tc-divider"></div>
+                        <div class="tc-author">
+                            <div class="tc-ava" style="background:#fff0f1;color:var(--gold);">VD</div>
+                            <div>
+                                <div class="tc-name">Varun Dhiman's </div>
+                                <div class="tc-role">Student and Parent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="tc-card">
+                    <div class="tc-video">
+                        <div class="tc-num">03 / 05</div>
+                        <iframe src="https://www.youtube.com/embed/qmMxwANw8AI?rel=0&modestbranding=1"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-stars">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                        </div>
+                        <p class="tc-quote">"Hi everyone, I am Ronak from Maharashtra. I couldn't make it to government
+                            medical seats this year and was searching for admission guidance to secure a seat in good
+                            MBBS colleges. Then I came to know about Learntech consultancy and their expert service in
+                            admission guidance. Right from the day I contacted them, they helped me with every procedure
+                            on my behalf. I am very grateful to the Learntech consultancy, helping me to secure
+                            admission in one of the top colleges in Bangalore. It would not have been possible without
+                            your help. For all the students and parents who are worried about securing admission, I
+                            would recommend you to consult Learntech."</p>
+                        <div class="tc-divider"></div>
+                        <div class="tc-author">
+                            <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">R</div>
+                            <div>
+                                <div class="tc-name">Ronak's</div>
+                                <div class="tc-role">Student</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="tc-card">
+                    <div class="tc-video">
+                        <div class="tc-num">04 / 05</div>
+                        <iframe src="https://www.youtube.com/embed/Ekgpd8tPFJ8?si=Cv2jzh-jS0VLoCNJ"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-stars">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                        </div>
+                        <p class="tc-quote">"Hello I’m Smriti Deo and I am from Bhopal (M.P). Thanks to the people from
+                            Bangalore Study . I have got admission in Cardiac Care Technology at Raja Rajeshwari Medical
+                            College. They have been really supportive and friendly. They made the whole process really
+                            simple and convenient to me. They literally take care of all the procedures and make it
+                            really simple and hence all the process is really smooth. Thanks to Megha Ma'am, she has
+                            been really supportive and cleared all my queries and confusion. I’m really glad that I
+                            chose this platform for my career Guidance. Thank you so much."</p>
+                        <div class="tc-divider"></div>
+                        <div class="tc-author">
+                            <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">SD</div>
+                            <div>
+                                <div class="tc-name">Smriti Deo's</div>
+                                <div class="tc-role">Student</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="tc-card">
+                    <div class="tc-video">
+                        <div class="tc-num">05 / 05</div>
+                        <iframe src="https://www.youtube.com/embed/K7g_h2VJeKU?si=gRMQSMA7hSCnf8ia"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-stars">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                        </div>
+                        <p class="tc-quote">"I am Nikam Jokhio and I am from Arunachal Pradesh. I came to Bangalore for
+                            my further studies. The course I opted for is B. Sc Anesthesia at Dr. B R Ambedkar Medical
+                            College and Hospital. Learntech helped me find the best college. I am really thankful to
+                            Learntech and especially to Pooja ma'am. She has helped and guided me throughout. The whole
+                            team was really friendly and I am really thankful to them.
+                            "</p>
+                        <div class="tc-divider"></div>
+                        <div class="tc-author">
+                            <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">NK</div>
+                            <div>
+                                <div class="tc-name">Nikam Jokhio's</div>
+                                <div class="tc-role">Student</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="tc-controls">
+            <button class="tc-arrow" id="tcPrev">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+
+            <div class="tc-dots">
+                <button class="tc-dot active" data-i="0"></button>
+                <button class="tc-dot" data-i="1"></button>
+                <button class="tc-dot" data-i="2"></button>
+                <button class="tc-dot" data-i="3"></button>
+                <button class="tc-dot" data-i="4"></button>
+                <button class="tc-dot" data-i="5"></button>
+            </div>
+
+            <div class="tc-progress">
+                <div class="tc-progress-fill" id="tcFill"></div>
+            </div>
+
+            <button class="tc-arrow" id="tcNext">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const track = document.getElementById('tcTrack');
+        const cards = track.querySelectorAll('.tc-card');
+        const dots = document.querySelectorAll('.tc-dot');
+        const fill = document.getElementById('tcFill');
+        const total = cards.length;
+        const INTERVAL = 6000;
+        let cur = 0, elapsed = 0, lastTs = null, paused = false;
+
+        function getOffset() {
+            // offset so active card is centered in viewport
+            return cur * (cards[0].offsetWidth + 16);
+        }
+
+        function goTo(n) {
+            cur = (n + total) % total;
+            track.style.transform = `translateX(-${getOffset()}px)`;
+            cards.forEach((c, i) => c.classList.toggle('active', i === cur));
+            dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+            elapsed = 0; lastTs = null;
+            fill.style.width = '0%';
+        }
+
+        document.getElementById('tcPrev').addEventListener('click', () => goTo(cur - 1));
+        document.getElementById('tcNext').addEventListener('click', () => goTo(cur + 1));
+        dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
+
+        // swipe
+        let sx = 0;
+        track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; paused = true; }, { passive: true });
+        track.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - sx;
+            if (Math.abs(dx) > 44) goTo(dx < 0 ? cur + 1 : cur - 1);
+            paused = false; lastTs = null;
+        });
+
+        // autoplay
+        function tick(ts) {
+            if (!paused) {
+                if (!lastTs) lastTs = ts;
+                elapsed += ts - lastTs;
+                fill.style.width = Math.min((elapsed / INTERVAL) * 100, 100) + '%';
+                if (elapsed >= INTERVAL) goTo(cur + 1);
+            }
+            lastTs = paused ? null : ts;
+            requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+
+        // recalc on resize
+        window.addEventListener('resize', () => {
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${getOffset()}px)`;
+            requestAnimationFrame(() => track.style.transition = '');
+        });
+    </script>
+
+
+
+
+
+
+
+    <!-- ======================================================================================================================================================================== -->
+
+
+
+
+
+
+
+
+    <!-- ══════════════════════════
+     CTA SECTION
+══════════════════════════ -->
+    <section id="cta" class="mt-5">
+        <div class="orb orb-r"></div>
+        <div class="orb orb-l"></div>
+
+        <div class="container position-relative" style="z-index:2">
+
+            <div class="eyebrows">
+                <span class="e-dot"></span>
+                Admissions Open 2026
+            </div>
+
+            <h2 class="cta-headline">
+                Let's Build Your <em>Future</em> <span class="red">Today</span>
+            </h2>
+
+            <p class="cta-sub">
+                Know more about us
+            </p>
+
+            <!-- Horizontal Form -->
+            <div class="h-form-wrap">
+                <div id="ctaForm">
+                    <div class="h-form">
+                        <div class="h-field">
+                            <label class="h-label">Full Name</label>
+                            <input class="h-input" id="fname" type="text" placeholder="Your name" />
+                        </div>
+                        <div class="h-field">
+                            <label class="h-label">Phone Number</label>
+                            <input class="h-input" id="fphone" type="tel" placeholder="+91 00000 00000" />
+                        </div>
+                        <div class="h-field">
+                            <label class="h-label">Desired Course</label>
+                            <select class="h-select" id="fcourse">
+                                <option value="">Select a course…</option>
+                                <option>Web Development</option>
+                                <option>Data Science</option>
+                                <option>UI/UX Design</option>
+                                <option>Digital Marketing</option>
+                                <option>Cloud Computing</option>
+                                <option>Cybersecurity</option>
+                                <option>AI &amp; Machine Learning</option>
+                            </select>
+                        </div>
+                        <button class="h-submit" onclick="handleSubmit()">
+                            Get Started &rarr;
+                        </button>
+                    </div>
+                    <p class="form-note">Free session &nbsp;·&nbsp; No spam &nbsp;·&nbsp; No commitment</p>
+                </div>
+
+                <div id="ctaSuccess">
+                    <div class="s-e">🎉</div>
+                    <div class="s-m">You're on the list!</div>
+                    <div class="s-s">Our counsellor will call you within 24 hours.</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <style>
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       CTA SECTION
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        #cta {
+            background: linear-gradient(140deg, var(--gold) 0%, #162050eb 45%, var(--accent) 100%);
+            padding: 28px 0 26px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            margin: 40px;
+            border-radius: 60px 60px 60px 60px ;
+        }
+
+        /* grid lines */
+        #cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+            background-size: 56px 56px;
+            pointer-events: none;
+        }
+
+        /* orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+        }
+
+        .orb-r {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(228, 52, 65, 0.2) 0%, transparent 70%);
+            top: -200px;
+            right: -150px;
+            animation: drift 11s ease-in-out infinite alternate;
+        }
+
+        .orb-l {
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, rgba(220, 230, 255, 0.13) 0%, transparent 70%);
+            bottom: -120px;
+            left: -80px;
+            animation: drift 9s 2s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(22px, 28px);
+            }
+        }
+
+        /* eyebrow pill */
+        .eyebrows {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 100px;
+            padding: 5px 16px;
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            opacity: 0;
+            animation: riseIn 0.8s 0.1s ease forwards;
+        }
+
+        .e-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: blink 2.4s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(228, 52, 65, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(228, 52, 65, 0);
+            }
+        }
+
+        /* headline */
+        .cta-headline {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(38px, 5.5vw, 68px);
+            font-weight: 400;
+            line-height: 1.06;
+            color: #fff;
+            margin-bottom: 14px;
+            opacity: 0;
+            animation: riseIn 0.85s 0.2s ease forwards;
+        }
+
+        .cta-headline em {
+            font-style: italic;
+            color: var(--accent-light);
+        }
+
+        .cta-headline .red {
+            color: var(--gold);
+        }
+
+        .cta-sub {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.58);
+            line-height: 1.75;
+            max-width: 520px;
+            margin: 0 auto 44px;
+            opacity: 0;
+            animation: riseIn 0.85s 0.3s ease forwards;
+        }
+
+        /* ── HORIZONTAL FORM ── */
+        .h-form-wrap {
+            opacity: 0;
+            animation: riseIn 0.9s 0.42s ease forwards;
+        }
+
+        .h-form {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 20px 20px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            flex-wrap: nowrap;
+        }
+
+        .h-field {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .h-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            text-align: left;
+        }
+
+        .h-input,
+        .h-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            font-family: 'Sora', sans-serif;
+            font-size: 13px;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .h-input::placeholder {
+            color: rgba(255, 255, 255, 0.38);
+        }
+
+        .h-input:focus,
+        .h-select:focus {
+            border-color: rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+        }
+
+        .h-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 13px center;
+            cursor: pointer;
+        }
+
+        .h-select option {
+            background: #1a2d6e;
+            color: #fff;
+        }
+
+        .h-submit {
+            flex: 0 0 auto;
+            padding: 12px 28px;
+            background: var(--gold);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Sora', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.15s, box-shadow 0.18s, background 0.2s;
+            align-self: flex-end;
+        }
+
+        .h-submit::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+            animation: shimmer 2.8s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%
+            }
+
+            100% {
+                left: 200%
+            }
+        }
+
+        .h-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(228, 52, 65, 0.45);
+            background: #c92a35;
+        }
+
+        .h-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-note {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.38);
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        /* success */
+        #ctaSuccess {
+            display: none;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+            padding: 28px 20px;
+            text-align: center;
+            animation: riseIn 0.5s forwards;
+        }
+
+        #ctaSuccess .s-e {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        #ctaSuccess .s-m {
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        #ctaSuccess .s-s {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 6px;
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0)
+            }
+
+            20% {
+                transform: translateX(-7px)
+            }
+
+            40% {
+                transform: translateX(7px)
+            }
+
+            60% {
+                transform: translateX(-4px)
+            }
+
+            80% {
+                transform: translateX(4px)
+            }
+        }
+    </style>
+
+
+
+
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <a class="navbar-brand" href="#">
+                        <img src="media/Leantech_logo.svg" alt="EduGuide"
+                            style="height: 90px; margin-right: 0.5rem;"></a>
+                    <div class="footer-tagline">We are a dedicated family of counsellors and ed-tech professionals
+                        turning career counselling for students into a clear, strategic roadmap which leads to academic
+                        and professional success.</div>
+                </div>
+                <div class="col-lg-2 col-sm-4">
+                    <div
+                        style="font-size: 0.9rem;font-weight: 500;letter-spacing:.18em;text-transform:uppercase;color:#1a1612;margin-bottom:.8rem;">
+                        Navigate</div>
+                    <div style="display:flex;flex-direction:column;gap:.5rem;">
+                        <a href="#who" style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
+                            onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">Who We
+                            Are</a>
+                        <a href="#what"
+                            style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
+                            onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">What We
+                            Do</a>
+                        <a href="#services"
+                            style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
+                            onmouseover="this.style.color='#c8522a'"
+                            onmouseout="this.style.color='#1a1612'">Services</a>
+                        <a href="#stories"
+                            style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
+                            onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">Success
+                            Stories</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-4">
+                    <div
+                        style="font-size:.9rem;letter-spacing:.18em;text-transform:uppercase;color:#1a1612;margin-bottom:.8rem; font-weight: 500;">
+                        Contact</div>
+                    <div style="font-size:.82rem;line-height:1.9;color:#1a1612;">
+                        #80 (4), 'D' Main Rd, East End, 9th Block,<br>
+                        Jayanagar, Bangalore, Karnataka - 560041<br>
+                        Mon–Sat, 9am – 6pm IST<br>
+                        <a href="mailto:info@learntechww.com" style="color:#1a1612;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">info@learntechww.com</a><br>
+                        <a href="tel:1800120869" style="color:#1a1612;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">1800 120 8696</a><br>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-4">
+                    <div
+                        style="font-size:.9rem; font-weight: 500; letter-spacing:.18em;text-transform:uppercase;color:#1a1612;margin-bottom:.8rem;">
+                        Follow</div>
+                    <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
+                        <a href="https://www.instagram.com/learntechedus"
+                            style="width:36px;height:36px;border:1px solid rgb(0, 0, 0);border-radius:2px;display:flex;align-items:center;justify-content:center;color:#1a1612;text-decoration:none;transition:all .2s;font-size:.95rem;"
+                            onmouseover="this.style.borderColor='#c8522a';this.style.color='#c8522a'"
+                           ><i
+                                class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w"
+                            style="width:36px;height:36px;border:1px solid rgb(0, 0, 0);border-radius:2px;display:flex;align-items:center;justify-content:center;color:#1a1612;text-decoration:none;transition:all .2s;font-size:.95rem;"
+                            onmouseover="this.style.borderColor='#c8522a';this.style.color='#c8522a'"
+                           ><i
+                                class="bi bi-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/"
+                            style="width:36px;height:36px;border:1px solid rgb(0, 0, 0);border-radius:2px;display:flex;align-items:center;justify-content:center;color:#1a1612;text-decoration:none;transition:all .2s;font-size:.95rem;"
+                            onmouseover="this.style.borderColor='#c8522a';this.style.color='#c8522a'"
+                           ><i
+                                class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <hr class="footer-divider" />
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <div class="footer-copy">© 2025 EduGuide. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div> -->
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sticky nav shadow
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Form submit
+        document.getElementById('leadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<i class="bi bi-check-circle"></i> &nbsp; We\'ll be in touch soon!';
+            btn.style.background = '#2d6a4f';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = 'Start My Journey &nbsp; <i class="bi bi-arrow-right"></i>';
+                btn.style.background = '';
+                btn.disabled = false;
+                this.reset();
+            }, 4000);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // close mobile nav if open
+                    const collapse = document.getElementById('navMenu');
+                    if (collapse.classList.contains('show')) {
+                        bootstrap.Collapse.getInstance(collapse)?.hide();
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        (function () {
+            const track = document.getElementById('track');
+            const outer = document.getElementById('trackOuter');
+            const prev = document.getElementById('btnPrev');
+            const next = document.getElementById('btnNext');
+            const dotsEl = document.getElementById('dots');
+            const cards = Array.from(track.children);
+            let cur = 0, timer = null, drag = false, dragX = 0, dragD = 0;
+
+            function visible() {
+                const w = outer.offsetWidth;
+                if (w >= 700) return 4;
+                if (w >= 540) return 2;
+                return 1;
+            }
+            function cardW() { return cards[0].offsetWidth + 22; }
+            function maxIdx() { return Math.max(0, cards.length - visible()); }
+
+            function goTo(i, anim = true) {
+                cur = Math.max(0, Math.min(i, maxIdx()));
+                if (!anim) track.style.transition = 'none';
+                track.style.transform = `translateX(-${cur * cardW()}px)`;
+                if (!anim) requestAnimationFrame(() => track.style.transition = '');
+                updateDots();
+            }
+            function goNext() { goTo(cur < maxIdx() ? cur + 1 : 0); }
+            function goPrev() { goTo(cur > 0 ? cur - 1 : maxIdx()); }
+
+            function buildDots() {
+                dotsEl.innerHTML = '';
+                for (let i = 0; i <= maxIdx(); i++) {
+                    const d = document.createElement('button');
+                    d.className = 'dot' + (i === 0 ? ' active' : '');
+                    d.addEventListener('click', () => { goTo(i); reset(); });
+                    dotsEl.appendChild(d);
+                }
+            }
+            function updateDots() {
+                dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+            }
+
+            function start() { timer = setInterval(goNext, 3000); }
+            function stop() { clearInterval(timer); }
+            function reset() { stop(); start(); }
+
+            outer.addEventListener('mouseenter', stop);
+            outer.addEventListener('mouseleave', start);
+            next.addEventListener('click', () => { goNext(); reset(); });
+            prev.addEventListener('click', () => { goPrev(); reset(); });
+
+            function ds(x) { drag = true; dragX = x; dragD = 0; stop(); }
+            function dm(x) { if (drag) dragD = x - dragX; }
+            function de() { if (!drag) return; drag = false; if (dragD < -50) goNext(); else if (dragD > 50) goPrev(); start(); }
+
+            outer.addEventListener('mousedown', e => ds(e.clientX));
+            window.addEventListener('mousemove', e => { if (drag) dm(e.clientX); });
+            window.addEventListener('mouseup', de);
+            outer.addEventListener('touchstart', e => ds(e.touches[0].clientX), { passive: true });
+            outer.addEventListener('touchmove', e => { if (drag) dm(e.touches[0].clientX); }, { passive: true });
+            outer.addEventListener('touchend', de);
+
+            let rt;
+            window.addEventListener('resize', () => {
+                clearTimeout(rt);
+                rt = setTimeout(() => { buildDots(); goTo(Math.min(cur, maxIdx()), false); }, 180);
+            });
+
+            buildDots();
+            goTo(0, false);
+            start();
+        })();
+    </script>
+
+</body>
+
+</html>

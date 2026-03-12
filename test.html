@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Your Future Today</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #ffffff;
+      --warm-white: #fffef9;
+      --ink: #1a1612;
+      --ink-soft: #3d3530;
+      --ink-muted: #7a6f66;
+      --accent: #274896;
+      --accent-light: #DCE6FF;
+      --accent-pale: #F3F6FF;
+      --gold: #e43441;
+      --border: #e8e0d4;
+      --border-light: #f0ebe2;
+      --shadow: rgba(26, 22, 18, 0.08);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--warm-white);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       CTA SECTION
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #cta {
+      background: linear-gradient(140deg, #09112e 0%, #162050 45%, #274896 100%);
+      padding: 88px 0 96px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* grid lines */
+    #cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none;
+    }
+
+    /* orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    .orb-r {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(228, 52, 65, 0.2) 0%, transparent 70%);
+      top: -200px;
+      right: -150px;
+      animation: drift 11s ease-in-out infinite alternate;
+    }
+
+    .orb-l {
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(220, 230, 255, 0.13) 0%, transparent 70%);
+      bottom: -120px;
+      left: -80px;
+      animation: drift 9s 2s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(22px, 28px);
+      }
+    }
+
+    /* eyebrow pill */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 100px;
+      padding: 5px 16px;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: riseIn 0.8s 0.1s ease forwards;
+    }
+
+    .e-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(228, 52, 65, 0.6);
+      }
+
+      50% {
+        box-shadow: 0 0 0 8px rgba(228, 52, 65, 0);
+      }
+    }
+
+    /* headline */
+    .cta-headline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 400;
+      line-height: 1.06;
+      color: #fff;
+      margin-bottom: 14px;
+      opacity: 0;
+      animation: riseIn 0.85s 0.2s ease forwards;
+    }
+
+    .cta-headline em {
+      font-style: italic;
+      color: var(--accent-light);
+    }
+
+    .cta-headline .red {
+      color: var(--gold);
+    }
+
+    .cta-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.58);
+      line-height: 1.75;
+      max-width: 520px;
+      margin: 0 auto 44px;
+      opacity: 0;
+      animation: riseIn 0.85s 0.3s ease forwards;
+    }
+
+    /* ── HORIZONTAL FORM ── */
+    .h-form-wrap {
+      opacity: 0;
+      animation: riseIn 0.9s 0.42s ease forwards;
+    }
+
+    .h-form {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 20px 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      flex-wrap: nowrap;
+    }
+
+    .h-field {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .h-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    .h-input,
+    .h-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .h-input::placeholder {
+      color: rgba(255, 255, 255, 0.38);
+    }
+
+    .h-input:focus,
+    .h-select:focus {
+      border-color: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+    }
+
+    .h-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      cursor: pointer;
+    }
+
+    .h-select option {
+      background: #1a2d6e;
+      color: #fff;
+    }
+
+    .h-submit {
+      flex: 0 0 auto;
+      padding: 12px 28px;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.18s, background 0.2s;
+      align-self: flex-end;
+    }
+
+    .h-submit::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+      animation: shimmer 2.8s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%
+      }
+
+      100% {
+        left: 200%
+      }
+    }
+
+    .h-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(228, 52, 65, 0.45);
+      background: #c92a35;
+    }
+
+    .h-submit:active {
+      transform: translateY(0);
+    }
+
+    .form-note {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.38);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* success */
+    #ctaSuccess {
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 28px 20px;
+      text-align: center;
+      animation: riseIn 0.5s forwards;
+    }
+
+    #ctaSuccess .s-e {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    #ctaSuccess .s-m {
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    #ctaSuccess .s-s {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 6px;
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      20% {
+        transform: translateX(-7px)
+      }
+
+      40% {
+        transform: translateX(7px)
+      }
+
+      60% {
+        transform: translateX(-4px)
+      }
+
+      80% {
+        transform: translateX(4px)
+      }
+    }
+
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ABOUT SECTION
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #about {
+      padding: 96px 0 110px;
+      background: var(--warm-white);
+    }
+
+    .about-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent-pale);
+      border: 1px solid var(--accent-light);
+      border-radius: 100px;
+      padding: 4px 14px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .about-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 0;
+    }
+
+    .about-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* slideshow */
+    .ss-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.11);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.75s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-cap-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+      padding: 44px 20px 16px;
+    }
+
+    .slide-cap {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .ss-dots {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      display: flex;
+      gap: 6px;
+      z-index: 4;
+    }
+
+    .sdot {
+      width: 8px;
+      height: 8px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.38);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 0;
+    }
+
+    .sdot.active {
+      background: #fff;
+      width: 22px;
+    }
+
+    /* text card that slides up */
+    .about-card {
+      background: var(--cream);
+      border: 1.5px solid var(--border-light);
+      border-radius: 20px;
+      padding: 40px 34px;
+      height: 100%;
+    }
+
+    .about-body {
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.82;
+      margin-bottom: 30px;
+    }
+
+    .feat {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .feat-ic {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: var(--accent-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+
+    .feat-txt strong {
+      display: block;
+      font-size: 13px;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .feat-txt span {
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.55;
+    }
+
+    .know-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 11px 24px;
+      color: var(--accent);
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.22s;
+      margin-top: 8px;
+    }
+
+    .know-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(39, 72, 150, 0.22);
+    }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.on {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .d1 {
+      transition-delay: 0.06s;
+    }
+
+    .d2 {
+      transition-delay: 0.18s;
+    }
+
+    .d3 {
+      transition-delay: 0.3s;
+    }
+
+    /* mobile */
+    @media (max-width: 768px) {
+      .h-form {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .h-submit {
+        width: 100%;
+        text-align: center;
+      }
+
+      .about-card {
+        margin-top: 24px;
+        padding: 28px 22px;
+      }
+
+      #cta {
+        padding: 70px 0 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════
+     CTA SECTION
+══════════════════════════ -->
+  <section id="cta">
+    <div class="orb orb-r"></div>
+    <div class="orb orb-l"></div>
+
+    <div class="container position-relative" style="z-index:2">
+
+      <div class="eyebrow">
+        <span class="e-dot"></span>
+        Admissions Open 2025
+      </div>
+
+      <h2 class="cta-headline">
+        Let's Build Your <em>Future</em> <span class="red">Today</span>
+      </h2>
+
+      <p class="cta-sub">
+        Join thousands of students who've transformed their careers. Your journey starts here.
+      </p>
+
+      <!-- Horizontal Form -->
+      <div class="h-form-wrap">
+        <div id="ctaForm">
+          <div class="h-form">
+            <div class="h-field">
+              <label class="h-label">Full Name</label>
+              <input class="h-input" id="fname" type="text" placeholder="Your name" />
+            </div>
+            <div class="h-field">
+              <label class="h-label">Phone Number</label>
+              <input class="h-input" id="fphone" type="tel" placeholder="+91 00000 00000" />
+            </div>
+            <div class="h-field">
+              <label class="h-label">Desired Course</label>
+              <select class="h-select" id="fcourse">
+                <option value="">Select a course…</option>
+                <option>Web Development</option>
+                <option>Data Science</option>
+                <option>UI/UX Design</option>
+                <option>Digital Marketing</option>
+                <option>Cloud Computing</option>
+                <option>Cybersecurity</option>
+                <option>AI &amp; Machine Learning</option>
+              </select>
+            </div>
+            <button class="h-submit" onclick="handleSubmit()">
+              Get Started &rarr;
+            </button>
+          </div>
+          <p class="form-note">Free session &nbsp;·&nbsp; No spam &nbsp;·&nbsp; No commitment</p>
+        </div>
+
+        <div id="ctaSuccess">
+          <div class="s-e">🎉</div>
+          <div class="s-m">You're on the list!</div>
+          <div class="s-s">Our counsellor will call you within 24 hours.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+     ABOUT SECTION
+══════════════════════════ -->
+  <section id="about">
+    <div class="container">
+
+      <!-- Heading -->
+      <div class="text-center mb-5 reveal d1">
+        <div class="about-eyebrow">
+          <span style="width:5px;height:5px;background:var(--accent);border-radius:50%;display:inline-block;"></span>
+          Know More About Us
+        </div>
+        <h2 class="about-title">
+          More than a course — <em>a launchpad for life</em>
+        </h2>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+
+        <!-- Slideshow -->
+        <div class="col-lg-6 reveal d2">
+          <div class="ss-wrap">
+            <div class="slide active">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80" alt="Mentors" />
+              <div class="slide-cap-wrap">
+                <div class="slide-cap">World-class mentors</div>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=900&q=80" alt="Projects" />
+              <div class="slide-cap-wrap">
+                <div class="slide-cap">Hands-on live projects</div>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&q=80" alt="Careers" />
+              <div class="slide-cap-wrap">
+                <div class="slide-cap">Career-ready graduates</div>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="https://images.unsplash.com/photo-1558403194-611308249627?w=900&q=80" alt="Community" />
+              <div class="slide-cap-wrap">
+                <div class="slide-cap">A thriving community</div>
+              </div>
+            </div>
+            <div class="ss-dots">
+              <button class="sdot active" onclick="goSlide(0)"></button>
+              <button class="sdot" onclick="goSlide(1)"></button>
+              <button class="sdot" onclick="goSlide(2)"></button>
+              <button class="sdot" onclick="goSlide(3)"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text card -->
+        <div class="col-lg-6 reveal d3">
+          <div class="about-card">
+            <p class="about-body">
+              We are a premier ed-tech institute dedicated to equipping students with the skills demanded by today's
+              most innovative companies. Our curriculum is co-created with industry leaders so every lesson translates
+              directly to real-world impact.
+            </p>
+
+            <div class="feat">
+              <div class="feat-ic">🎯</div>
+              <div class="feat-txt">
+                <strong>Job-Focused Curriculum</strong>
+                <span>Live projects, case studies &amp; portfolio work built for hiring teams.</span>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-ic">🤝</div>
+              <div class="feat-txt">
+                <strong>Dedicated Placement Support</strong>
+                <span>200+ hiring partners and a team that works until you're placed.</span>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-ic">🏆</div>
+              <div class="feat-txt">
+                <strong>Expert Mentorship</strong>
+                <span>Learn from industry veterans with lifetime alumni network access.</span>
+              </div>
+            </div>
+
+            <a href="#" class="know-btn">Explore Our Story &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    /* ── Form ── */
+    function handleSubmit() {
+      const n = document.getElementById('fname').value.trim();
+      const p = document.getElementById('fphone').value.trim();
+      const c = document.getElementById('fcourse').value;
+      if (!n || !p || !c) {
+        const f = document.querySelector('.h-form');
+        f.style.animation = 'none';
+        requestAnimationFrame(() => { f.style.animation = 'shake 0.4s ease'; });
+        return;
+      }
+      document.getElementById('ctaForm').style.display = 'none';
+      document.getElementById('ctaSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('fname').value = '';
+        document.getElementById('fphone').value = '';
+        document.getElementById('fcourse').value = '';
+        document.getElementById('ctaSuccess').style.display = 'none';
+        document.getElementById('ctaForm').style.display = 'block';
+      }, 5000);
+    }
+
+    /* ── Slideshow ── */
+    let cur = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.sdot');
+    function goSlide(n) {
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur = n;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+    }
+    setInterval(() => goSlide((cur + 1) % slides.length), 3800);
+
+    /* ── Scroll reveal ── */
+    const obs = new IntersectionObserver(e => {
+      e.forEach(el => { if (el.isIntersecting) el.target.classList.add('on'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>
