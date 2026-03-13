@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EduGuide — You Don't Have to Decide Alone</title>
+    <title>Leartech landing page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -16,7 +16,7 @@
             --warm-white: #fffef9;
             --ink: #1a1612;
             --ink-soft: #3d3530;
-            --ink-muted: #7a6f66;
+            --ink-muted: #000000;
             --accent: #274896;
             --accent-light: #DCE6FF;
             --accent-pale: #F3F6FF;
@@ -48,6 +48,11 @@
 
         .container {
             max-width: 95%;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+
         }
 
         /* ── NOISE TEXTURE OVERLAY ── */
@@ -122,7 +127,7 @@
             font-weight: 500;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            background: var(--gold);
+            background: linear-gradient(140deg, var(--gold) 0%, #162050eb 45%, var(--accent) 100%);
             color: var(--cream) !important;
             border-radius: 2px;
             padding: 0.5rem 1.3rem !important;
@@ -130,7 +135,7 @@
         }
 
         .btn-nav-cta:hover {
-            background: var(--accent);
+            background: linear-gradient(140deg, var(--gold) 0%, #162050eb 45%, var(--accent) 100%);
             transform: translateY(-1px);
         }
 
@@ -153,6 +158,7 @@
             position: relative;
             overflow: hidden;
             padding: 1rem 0 1rem;
+            margin-bottom: 40px;
         }
 
         .hero-eyebrow {
@@ -219,7 +225,8 @@
 
         .hero-body {
             font-size: 1rem;
-            color: var(--ink-muted);
+            color: black;
+            font-weight: 500;
             line-height: 1.8;
             max-width: 550px;
             margin-bottom: 2.2rem;
@@ -279,16 +286,6 @@
             animation: fadeUp 0.8s 0.4s ease forwards;
         }
 
-        /* .form-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
-          
-        } */
 
         .form-card-eyebrow {
             font-size: 0.68rem;
@@ -338,7 +335,7 @@
         }
 
         .form-control::placeholder {
-            color: var(--ink-muted);
+            color: rgb(144, 144, 144);
             font-size: 0.88rem;
         }
 
@@ -348,7 +345,7 @@
         }
 
         .btn-submit {
-            background: var(--accent);
+            background: linear-gradient(140deg, var(--gold) 0%, #162050eb 45%, var(--accent) 100%);
             color: var(--cream);
             border: none;
             border-radius: 2px;
@@ -372,9 +369,9 @@
         }
 
         .btn-submit:hover {
-            background: var(--accent);
+            background: linear-gradient(140deg, var(--gold) 0%, #162050eb 45%, var(--accent) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(200, 82, 42, 0.3);
+            box-shadow: 0 8px 24px rgba(200, 42, 42, 0.3);
             color: #fff;
         }
 
@@ -604,20 +601,15 @@
             gap: 1.5rem;
             padding: 1.5rem 0;
             border-radius: 20px;
-
             text-decoration: none;
             transition: background 0.2s;
             cursor: pointer;
-            background: linear-gradient(to right, var(--accent), rgba(217, 58, 58, 0));
+            background: linear-gradient(to right, #274896, #274896ba, rgba(217, 58, 58, 0));
         }
 
         .service-item:first-child {
             border-top: 1px solid var(--border-light);
         }
-
-        /* .service-item:hover .service-title {
-            color: var(--gold);
-        } */
 
         .service-item:hover .service-arrow {
             transform: translateX(4px);
@@ -628,7 +620,6 @@
             width: 56px;
             height: 56px;
             border: 1px solid var(--border);
-            /* border-radius: 50px; */
             background: var(--warm-white);
             display: flex;
             align-items: center;
@@ -645,18 +636,15 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 600;
-
             color: var(--cream);
             margin-bottom: 0.2rem;
             transition: color 0.2s;
         }
 
         .service-desc {
-            font-size: 0.85rem;
-            color: black;
+            font-size: 1rem;
+            color: rgb(255, 255, 255);
             line-height: 1.6;
-            width: 500px;
-
         }
 
         .service-arrow {
@@ -666,51 +654,66 @@
             flex-shrink: 0;
         }
 
-        /* ── FOOTER ── */
-        footer {
-            background: var(--cream);
-            color: rgba(0, 0, 0, 0.6);
-            padding: 3rem 0 2rem;
+        /* ── MOBILE RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .service-list {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .my-3 {
+                grid-template-columns: 56px 1fr auto;
+                gap: 1rem;
+                padding: 1.2rem 0;
+            }
+
+            .service-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .service-title {
+                font-size: 1rem;
+            }
+
+            .service-desc {
+                font-size: 0.8rem;
+            }
         }
 
-        .footer-brand {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.3rem;
-            color: var(--cream);
-            margin-bottom: 0.5rem;
+        @media (max-width: 480px) {
+            .my-3 {
+                grid-template-columns: 48px 1fr;
+                gap: 0.8rem;
+                padding: 1rem 0;
+            }
+
+            .service-arrow {
+                display: none;
+            }
+
+            .service-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+            }
+
+            .service-title {
+                font-size: 0.95rem;
+                margin-bottom: 0.1rem;
+            }
+
+            .service-desc {
+                font-size: 0.75rem;
+                line-height: 1.5;
+            }
         }
 
-        .footer-brand span {
-            color: var(--accent);
-        }
 
-        .footer-tagline {
-            font-size: 0.82rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            margin-left: 1.1rem;
-        }
 
-        .footer-divider {
-            border-color: rgba(0, 0, 0, 0.1);
-            margin: 2rem 0 1.5rem;
-        }
-
-        .footer-copy {
-            font-size: 0.78rem;
-        }
-
-        .footer-links a {
-            color: rgba(0, 0, 0, 0.5);
-            text-decoration: none;
-            font-size: 0.78rem;
-            margin-left: 1.5rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
 
         /* ── ANIMATIONS ── */
         @keyframes fadeUp {
@@ -804,11 +807,11 @@
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav mx-auto gap-1">
                     <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#who">Who We Are</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#what">What We Do</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#who">Who We Are?</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#what">What We Do?</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Our Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#institutions">Institutions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#stories">Success Stories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#College-swiper">Institutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testi">Success Stories</a></li>
                 </ul>
                 <a class="nav-link btn-nav-cta ms-2" href="#hero">Get Started</a>
             </div>
@@ -869,7 +872,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label">Email *</label>
-                                    <input type="email" class="form-control" placeholder="you@email.com" required />
+                                    <input type="email" class="form-control" placeholder="Email" required />
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label">Phone *</label>
@@ -877,7 +880,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label">Location *</label>
-                                    <input type="text" class="form-control" placeholder="City, State" required />
+                                    <input type="text" class="form-control" placeholder="Location" required />
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label">Select Course *</label>
@@ -896,19 +899,15 @@
                                 <div class="col-12">
                                     <label class="form-label">Message <span
                                             style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;">(Optional)</span></label>
-                                    <textarea class="form-control"
-                                        placeholder="Tell us a bit about your goals…"></textarea>
+                                    <textarea class="form-control" placeholder="Message (Optional)"></textarea>
                                 </div>
-                                <div class="col-12 mt-1">
+                                <div class="col-12 mt-3">
                                     <button type="submit" class="btn-submit" id="submitBtn">
                                         Start My Journey &nbsp; <i class="bi bi-arrow-right"></i>
                                     </button>
                                 </div>
                             </div>
                         </form>
-
-                        <p class="form-privacy"><i class="bi bi-shield-check"></i> &nbsp; Your information is 100%
-                            secure. We never share your data.</p>
                     </div>
                 </div>
 
@@ -928,24 +927,21 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 ">
+                <div class="col-lg-7">
                     <div class="reveal reveal-delay-1">
                         <div class="section-eyebrow">Who We Are</div>
                         <h2 class="section-title">Experts Who've <em>Been There</em></h2>
                         <p class="section-body">
-                            Every year, over 20 lakh students fight for a place in India’s top medical colleges. More
-                            than 10 lakh students pray they land a seat in a top engineering college. Your competition
-                            is not just the numbers, but the process of getting there. Multiple rounds of counselling,
-                            unpredictable cut-offs, and piles of paperwork. One wrong preference on a form, one missed
-                            deadline, and you may miss out on your dream.<br>
+                            Every year, over 30 lakh students fight for a place in India’s top medical and engineering
+                            colleges. Your competition is not just the numbers, but the process of getting there.
+                            Multiple rounds of counselling, unpredictable cut-offs, and piles of paperwork. One wrong
+                            preference on a form, one missed deadline, and you may miss out on your dream. No matter
+                            what career options you are looking for, making the right choice demands getting rid of this
+                            uncertainty.<br><br>
+                            That’s where Learntech comes to your rescue. We are a dedicated family of counsellors and
+                            ed-tech professionals turning career counselling into a clear, strategic roadmap to success.
 
-                            No matter what career options after 12th science you are looking for, whether you are aiming
-                            for a top-tier Medical seat, or a premier engineering program, making the right choice
-                            demands getting rid of your uncertainty.<br>
 
-                            That’s where Learntech comes to the rescue. We are a dedicated family of counsellors and
-                            ed-tech professionals turning career counselling for students into a clear, strategic
-                            roadmap which leads to success.
 
                         </p>
                     </div>
@@ -1026,95 +1022,509 @@
         </div>
     </section>
 
+
+
+
+    <!-- 
+
+    <section class="sections">
+        <h2 class="section-title">Turning Confusion Into <em>Clarity</em></h2>
+        <img class="section-image"
+            src="media/bundles-bales-paper-documents-stacks-packs-pile-desk-office-ai-generated.png"
+            alt="Section Image">
+    </section>
+    <style>
+        .sections {
+            padding: 1rem 2rem;
+            background: #fff;
+            text-align: center;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 12px;
+        }
+    </style>
+ -->
+
+
+
+
+
+
     <!-- ══ SERVICES ══ -->
     <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 reveal">
-                    <div class="section-eyebrow">Our Services</div>
-                    <h2 class="section-title">Everything You <em>Need</em>, In One Place</h2>
-                    <!-- <p class="section-body">Comprehensive support at every stage of your admissions journey — from
-                        exploration to enrollment.</p> -->
-                </div>
+
+        <style>
+            #services {
+                font-family: 'Poppins', sans-serif;
+                background: #ffffff;
+                min-height: 100vh;
+                padding: 3rem 2.2rem 2rem;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .sw-bg-blob {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+            .sw-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                margin-bottom: 1.8rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .sw-eye {
+                display: inline-flex;
+                align-items: center;
+                gap: 9px;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: #e43441;
+                margin-bottom: 0.55rem;
+            }
+
+            .sw-eye-line {
+                width: 30px;
+                height: 1px;
+                background: #e43441;
+                border-radius: 2px;
+            }
+
+            .sw-heading {
+                font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+                font-weight: 600;
+                color: #0d0d0d;
+                line-height: 1.18;
+                max-width: 430px;
+            }
+
+            .sw-heading em {
+                font-style: italic;
+                color: #274896;
+            }
+
+            .sw-tagline {
+                font-size: 0.8rem;
+                color: #888;
+                max-width: 240px;
+                line-height: 1.65;
+                text-align: right;
+            }
+
+            .sw-rows {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                flex: 1;
+                position: relative;
+                z-index: 1;
+            }
+
+            .sw-row {
+                display: grid;
+                gap: 14px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            /* ── Card base ── */
+            .sc {
+                border-radius: 22px;
+                padding: 1.3rem 1.2rem 1.1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+                cursor: pointer;
+                transition: transform 0.24s cubic-bezier(.34, 1.56, .64, 1);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .sc:hover {
+                transform: translateY(-5px);
+            }
+
+            .sc-blob {
+                position: absolute;
+                border-radius: 50%;
+                width: 90px;
+                height: 90px;
+                top: -28px;
+                right: -22px;
+                opacity: 0.08;
+                pointer-events: none;
+            }
+
+            /* ── Card variants ── */
+            .sc-w {
+                background: #fff;
+            }
+
+            .sc-w .sc-blob {
+                background: #274896;
+            }
+
+            .sc-b {
+                background: #274896;
+            }
+
+            .sc-b .sc-blob {
+                background: #fff;
+            }
+
+            .sc-r {
+                background: #e43441;
+            }
+
+            .sc-r .sc-blob {
+                background: #fff;
+            }
+
+            /* ── Hexagon icon ── */
+            .sc-hex {
+                width: 54px;
+                height: 54px;
+                clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .sc-w .sc-hex {
+                background: #274896;
+            }
+
+            .sc-b .sc-hex {
+                background: #e43441;
+            }
+
+            .sc-r .sc-hex {
+                background: #fff;
+            }
+
+            .sc-hex i {
+                font-size: 1.4rem;
+            }
+
+            .sc-w .sc-hex i {
+                color: #fff;
+            }
+
+            .sc-b .sc-hex i {
+                color: #fff;
+            }
+
+            .sc-r .sc-hex i {
+                color: #e43441;
+            }
+
+            /* ── Number ── */
+            .sc-num {
+                font-size: 0.62rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                margin-bottom: -2px;
+            }
+
+            .sc-w .sc-num {
+                color: rgba(0, 0, 0, 0.18);
+            }
+
+            .sc-b .sc-num,
+            .sc-r .sc-num {
+                color: rgba(255, 255, 255, 0.28);
+            }
+
+            /* ── Title ── */
+            .sc-title {
+                font-size: 1.3rem;
+                font-weight: 600;
+                line-height: 1.28;
+            }
+
+            .sc-w .sc-title {
+                color: #0d0d0d;
+            }
+
+            .sc-b .sc-title,
+            .sc-r .sc-title {
+                color: #fff;
+            }
+
+            /* ── Description ── */
+            .sc-desc {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                flex: 1;
+            }
+
+            .sc-w .sc-desc {
+                color: rgba(0, 0, 0, 0.88);
+            }
+
+            .sc-b .sc-desc {
+                color: rgb(255, 255, 255);
+            }
+
+            .sc-r .sc-desc {
+                color: rgb(255, 255, 255);
+            }
+
+            /* ── Footer row ── */
+            .sc-foot {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                padding-top: 0.6rem;
+                border-top: 1px solid;
+            }
+
+            .sc-w .sc-foot {
+                border-color: rgba(0, 0, 0, 0.07);
+            }
+
+            .sc-b .sc-foot {
+                border-color: rgba(255, 255, 255, 0.10);
+            }
+
+            .sc-r .sc-foot {
+                border-color: rgba(255, 255, 255, 0.18);
+            }
+
+            .sc-lbl {
+                font-size: 0.62rem;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+
+            .sc-w .sc-lbl {
+                color: #274896;
+            }
+
+            .sc-b .sc-lbl,
+            .sc-r .sc-lbl {
+                color: rgba(255, 255, 255, 0.58);
+            }
+
+            .sc-btn {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                transition: transform 0.18s;
+            }
+
+            .sc:hover .sc-btn {
+                transform: translateX(5px);
+            }
+
+            .sc-w .sc-btn {
+                background: #274896;
+            }
+
+            .sc-b .sc-btn {
+                background: #e43441;
+            }
+
+            .sc-r .sc-btn {
+                background: #fff;
+            }
+
+            .sc-btn i {
+                font-size: 0.78rem;
+            }
+
+            .sc-w .sc-btn i {
+                color: #fff;
+            }
+
+            .sc-b .sc-btn i {
+                color: #fff;
+            }
+
+            .sc-r .sc-btn i {
+                color: #e43441;
+            }
+
+            /* ── Responsive ── */
+            @media (max-width: 720px) {
+                .sw-row {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .sw-tagline {
+                    display: none;
+                }
+
+                #services {
+                    padding: 2.2rem 1.2rem 1.8rem;
+                }
+            }
+
+            @media (max-width: 440px) {
+                .sw-row {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+
+                #services {
+                    padding: 1.8rem 1rem 1.5rem;
+                }
+
+                .sw-heading {
+                    font-size: 1.4rem;
+                }
+            }
+        </style>
+
+        <!-- Decorative blobs -->
+        <div class="sw-bg-blob"
+            style="width:480px;height:480px;background:#274896;opacity:0.04;top:-200px;right:-180px;"></div>
+        <div class="sw-bg-blob"
+            style="width:280px;height:280px;background:#e43441;opacity:0.05;bottom:-100px;left:-80px;"></div>
+
+        <!-- Header -->
+        <div class="sw-top">
+            <div>
+                <div class="sw-eye"><span class="sw-eye-line"></span>Our Services</div>
+                <h2 class="section-title">Everything You <em>Need</em>, In One Place</h2>
             </div>
 
-            <div class="service-list reveal reveal-delay-1">
-                <div class="service-item my-3">
-                    <div class="service-icon"><i class="bi bi-person-lines-fill"></i></div>
-                    <div>
-                        <div class="service-title">Career & Admission Strategy</div>
-                        <div class="service-desc">Success in college admissions is never accidental. It comes from
-                            understanding a student’s strengths and navigating the admission process with the right
-                            strategy. By analysing aptitude, trends, and opportunities, we help students choose the
-                            courses and colleges where they have the strongest chance of securing a seat.
-                        </div>
-                    </div>
-                    <i class="bi bi-arrow-right service-arrow"></i>
-                </div>
-                <div class="service-item my-3">
-                    <div class="service-icon"><i class="bi bi-building"></i></div>
-                    <div>
-                        <div class="service-title">Seat Reservation Services</div>
-                        <div class="service-desc">Admissions can be unpredictable. To reduce this uncertainty, we help
-                            students secure seats early through formal reservation pathways, ensuring confirmed
-                            placements in preferred institutions before the peak admission rush begins.
-                        </div>
-                    </div>
-                    <i class="bi bi-arrow-right service-arrow"></i>
-                </div>
-                <div class="service-item my-3">
-                    <div class="service-icon"><i class="bi bi-file-earmark-text"></i></div>
-                    <div>
-                        <div class="service-title">Institutional Liaison & Campus Tours</div>
-                        <div class="service-desc">We arrange college campus tours and interactions with college
-                            leadership, enabling students and parents to evaluate faculty, infrastructure, and campus
-                            facilities before final enrollment.
-
-                        </div>
-                    </div>
-                    <i class="bi bi-arrow-right service-arrow"></i>
-                </div>
-                <div class="service-item my-3">
-                    <div class="service-icon"><i class="bi bi-bank2"></i></div>
-                    <div>
-                        <div class="service-title">Financial Planning & Loan Assistance
-                        </div>
-                        <div class="service-desc">We provide education loan assistance and help with scholarship
-                            applications, simplify documentation and help students navigate the approval process with
-                            trusted financial partners.
-                        </div>
-                    </div>
-                    <i class="bi bi-arrow-right service-arrow"></i>
-                </div>
-                <div class="service-item my-3">
-                    <div class="service-icon"><i class="bi bi-airplane-engines-fill"></i></div>
-                    <div>
-                        <div class="service-title">NRI Admission Consulting
-                        </div>
-                        <div class="service-desc">Dedicated support for NRI students navigating the Indian education
-                            system, focusing on quota compliance, management quota admission, documentation, and
-                            seamless transition logistics for NRI admission in India.
-                        </div>
-                    </div>
-                    <i class="bi bi-arrow-right service-arrow"></i>
-                </div>
-                <div class="service-item my-3">
-                    <div class="service-icon"><i class="bi bi-globe2"></i></div>
-                    <div>
-                        <div class="service-title">Global Admission Consulting
-                        </div>
-                        <div class="service-desc">We support students with comprehensive global admission guidance
-                            For international admissions in the UK, USA, and Europe—from university shortlisting and
-                            application preparation to visa processing and pre-departure guidance.
-
-                        </div>
-                    </div>
-                    <i class="bi bi-arrow-right service-arrow"></i>
-                </div>
-            </div>
         </div>
-    </section>
 
+        <!-- Cards -->
+        <div class="sw-rows">
+
+            <!-- Row 1 -->
+            <div class="sw-row">
+
+                <div class="sc sc-w">
+                    <div class="sc-blob"></div>
+                    <div class="sc-num">01</div>
+                    <div class="sc-hex"><i class="bi bi-person-lines-fill"></i></div>
+                    <div class="sc-title">Career & Admission Strategy</div>
+                    <div class="sc-desc">Success in college admissions is never accidental. It comes from navigating the
+                        admission process with the right strategy. We help students choose the courses and colleges
+                        where they have the strongest chance of securing a seat.
+                    </div>
+                    <div class="sc-foot">
+                        <span class="sc-lbl">Learn more</span>
+                        <div class="sc-btn"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="sc sc-b">
+                    <div class="sc-blob"></div>
+                    <div class="sc-num">02</div>
+                    <div class="sc-hex"><i class="bi bi-building"></i></div>
+                    <div class="sc-title">Seat Reservation Services</div>
+                    <div class="sc-desc">Admissions can be unpredictable. To reduce this uncertainty, we help students
+                        secure seats early through formal reservation pathways, ensuring confirmed placements in
+                        preferred institutions before the peak admission rush begins.
+                    </div>
+                    <div class="sc-foot">
+                        <span class="sc-lbl">Learn more</span>
+                        <div class="sc-btn"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="sc sc-r">
+                    <div class="sc-blob"></div>
+                    <div class="sc-num">03</div>
+                    <div class="sc-hex"><i class="bi bi-file-earmark-text"></i></div>
+                    <div class="sc-title">Institutional Liaison & Campus Tours</div>
+                    <div class="sc-desc">We arrange college campus tours and interactions with college leadership,
+                        enabling students and parents to evaluate faculty, infrastructure, and campus facilities before
+                        final enrollment.
+                    </div>
+                    <div class="sc-foot">
+                        <span class="sc-lbl">Learn more</span>
+                        <div class="sc-btn"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Row 2 -->
+            <div class="sw-row">
+
+                <div class="sc sc-r">
+                    <div class="sc-blob"></div>
+                    <div class="sc-num">04</div>
+                    <div class="sc-hex"><i class="bi bi-bank2"></i></div>
+                    <div class="sc-title">Financial Planning & Loan Assistance</div>
+                    <div class="sc-desc">We provide education loan assistance and help with scholarship applications,
+                        simplify documentation and help students navigate the approval process with trusted financial
+                        partners.
+                    </div>
+                    <div class="sc-foot">
+                        <span class="sc-lbl">Learn more</span>
+                        <div class="sc-btn"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="sc sc-w">
+                    <div class="sc-blob"></div>
+                    <div class="sc-num">05</div>
+                    <div class="sc-hex"><i class="bi bi-airplane-engines-fill"></i></div>
+                    <div class="sc-title">NRI Admission Consulting</div>
+                    <div class="sc-desc">Dedicated support for NRI students navigating the Indian education system,
+                        focusing on quota compliance, management quota admission, documentation, and seamless transition
+                        logistics for NRI admission in India.
+                    </div>
+                    <div class="sc-foot">
+                        <span class="sc-lbl">Learn more</span>
+                        <div class="sc-btn"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="sc sc-b">
+                    <div class="sc-blob"></div>
+                    <div class="sc-num">06</div>
+                    <div class="sc-hex"><i class="bi bi-globe2"></i></div>
+                    <div class="sc-title">Global Admission Consulting</div>
+                    <div class="sc-desc">We support students with comprehensive global admission guidance
+                        For international admissions in the UK, USA, and Europe—from university shortlisting and
+                        application preparation to visa processing and pre-departure guidance.
+                    </div>
+                    <div class="sc-foot">
+                        <span class="sc-lbl">Learn more</span>
+                        <div class="sc-btn"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
 
@@ -1144,7 +1554,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(200,82,42,0.18);color:#fff;border-color:rgba(200,82,42,0.4);">
-                                Yoga &amp; Wellness</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1163,7 +1574,8 @@
                                 alt="S-VYASA Kerala" onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(42,122,68,0.2);color:#fff;border-color:rgba(42,122,68,0.4);">
-                                Upcoming</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Kerala</div>
@@ -1182,7 +1594,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
-                                Yoga Campus</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1201,7 +1614,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(200,82,42,0.18);color:#fff;border-color:rgba(200,82,42,0.4);">
-                                Yoga &amp; Wellness</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1220,7 +1634,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(42,122,68,0.2);color:#fff;border-color:rgba(42,122,68,0.4);">
-                                Upcoming</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Kerala</div>
@@ -1239,7 +1654,8 @@
                                 alt="S-VYASA Yoga Campus" onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
-                                Yoga Campus</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1258,7 +1674,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(200,82,42,0.18);color:#fff;border-color:rgba(200,82,42,0.4);">
-                                Yoga &amp; Wellness</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1277,7 +1694,8 @@
                                 alt="S-VYASA Kerala" onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(42,122,68,0.2);color:#fff;border-color:rgba(42,122,68,0.4);">
-                                Upcoming</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Kerala</div>
@@ -1296,7 +1714,8 @@
                                 alt="S-VYASA Yoga Campus" onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
-                                Yoga Campus</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1313,7 +1732,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
-                                Yoga Campus</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1330,7 +1750,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
-                                Yoga Campus</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1347,7 +1768,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
-                                Yoga Campus</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1364,7 +1786,8 @@
                                 onerror="this.classList.add('errored')" />
                             <div class="card-badge"
                                 style="background:rgba(122,42,200,0.2);color:#fff;border-color:rgba(122,42,200,0.35);">
-                                Yoga Campus</div>
+                                Applications for AY 2026-27 Open
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="card-loc"><i class="bi bi-geo-alt-fill"></i>Bangalore</div>
@@ -1396,7 +1819,7 @@
             font-weight: 500;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: var(--accent) !important;
+            color: var(--gold) !important;
             margin-bottom: 0.9rem;
         }
 
@@ -1406,7 +1829,7 @@
             display: inline-block;
             width: 28px;
             height: 1px;
-            background: var(--accent);
+            background: var(--gold);
         }
 
         h1 {
@@ -1850,7 +2273,7 @@
             font-style: italic;
             font-size: clamp(14px, 1.8vw, 17px);
             line-height: 1.72;
-            color: var(--ink-soft);
+            color: black;
             flex: 1;
             position: relative;
             padding-left: 14px;
@@ -1893,13 +2316,13 @@
         }
 
         .tc-name {
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 500;
             color: var(--ink);
         }
 
         .tc-role {
-            font-size: 11px;
+            font-size: 14px;
             color: var(--ink-muted);
             margin-top: 2px;
         }
@@ -2020,297 +2443,335 @@
                 display: none;
             }
         }
+
+        @media (max-width: 600px) {
+            .p-5 {
+                padding: 0 !important;
+            }
+        }
+
+
+        @media (max-width: 680px) {
+            .tc-viewport {
+                padding: 0 26px;
+            }
+
+            .tc-card {
+                flex: 0 0 100%;
+            }
+        }
     </style>
 
+    <section id="testi">
 
 
-    <div class="text-center">
-        <div class="eyebrow">Testimonials</div>
-        <h1>Success <em>Stories</em> </h1>
-    </div>
+
+        <div class="text-center">
+            <div class="eyebrow">Testimonials</div>
+            <h1>Success <em>Stories</em> </h1>
+        </div>
 
 
-    <!-- CAROUSEL -->
-    <div class="tc-wrap ">
-        <div class="tc-viewport p-5">
-            <div class="tc-track" id="tcTrack">
+        <!-- CAROUSEL -->
+        <div class="tc-wrap ">
+            <div class="tc-viewport p-5">
 
-                <!-- SLIDE 1 -->
-                <div class="tc-card active">
-                    <div class="tc-video">
-                        <div class="tc-num">01 / 05</div>
-                        <iframe src="https://www.youtube.com/embed/5aUW_0wz018?rel=0&modestbranding=1"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-stars">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
+                <div class="tc-track" id="tcTrack">
+
+                    <!-- SLIDE 1 -->
+                    <div class="tc-card active">
+                        <div class="tc-video">
+                            <div class="tc-num">01 / 05</div>
+                            <iframe src="https://www.youtube.com/embed/5aUW_0wz018?rel=0&modestbranding=1"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         </div>
-                        <p class="tc-quote">"Hi! My name is Sakshi. I live in Bangalore. I am pursuing BCA with
-                            specialisation in AI, ML and robotics from S-VYASA deemed to be university. The environment
-                            and surroundings are very good. The college is located in an IT tech park consisting of tech
-                            giants. It is pretty. The internship is compulsory here which will be beneficial for us in
-                            the future.
+                        <div class="tc-body">
+                            <div class="tc-stars">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p class="tc-quote">"Hi! My name is Sakshi. I live in Bangalore. I am pursuing BCA with
+                                specialisation in AI, ML and robotics from S-VYASA deemed to be university. The
+                                environment
+                                and surroundings are very good. The college is located in an IT tech park consisting of
+                                tech
+                                giants. It is pretty. The internship is compulsory here which will be beneficial for us
+                                in
+                                the future.
 
-                            "</p>
-                        <div class="tc-divider"></div>
-                        <div class="tc-author">
-                            <div class="tc-ava" style="background:var(--accent-pale);color:var(--accent);">SP</div>
-                            <div>
-                                <div class="tc-name">Sakshi S Peddarpeth's</div>
-                                <div class="tc-role">Student</div>
+                                "</p>
+                            <div class="tc-divider"></div>
+                            <div class="tc-author">
+                                <div class="tc-ava" style="background:var(--accent-pale);color:var(--accent);">SP</div>
+                                <div>
+                                    <div class="tc-name">Sakshi S Peddarpeth's</div>
+                                    <div class="tc-role">Student</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- SLIDE 2 -->
-                <div class="tc-card">
-                    <div class="tc-video">
-                        <div class="tc-num">02 / 05</div>
-                        <iframe src="https://www.youtube.com/embed/m8TmsutwywA?rel=0&modestbranding=1"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-stars">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
+                    <!-- SLIDE 2 -->
+                    <div class="tc-card">
+                        <div class="tc-video">
+                            <div class="tc-num">02 / 05</div>
+                            <iframe src="https://www.youtube.com/embed/m8TmsutwywA?rel=0&modestbranding=1"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         </div>
-                        <p class="tc-quote">"Hi, My name is Varun and I got my admission into SRM Medical College, with
-                            the help of Learntech consultancy. The Learntech Institute motivated us to go to the SRM and
-                            physically we have seen that it’s one of the best colleges as far as the colleges I have
-                            visited so far and we are really happy that we got admission through Learntech.
-                            "</p>
-                        <div class="tc-divider"></div>
-                        <div class="tc-author">
-                            <div class="tc-ava" style="background:#fff0f1;color:var(--gold);">VD</div>
-                            <div>
-                                <div class="tc-name">Varun Dhiman's </div>
-                                <div class="tc-role">Student and Parent</div>
+                        <div class="tc-body">
+                            <div class="tc-stars">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p class="tc-quote">"Hi, My name is Varun and I got my admission into SRM Medical College,
+                                with
+                                the help of Learntech consultancy. The Learntech Institute motivated us to go to the SRM
+                                and
+                                physically we have seen that it’s one of the best colleges as far as the colleges I have
+                                visited so far and we are really happy that we got admission through Learntech.
+                                "</p>
+                            <div class="tc-divider"></div>
+                            <div class="tc-author">
+                                <div class="tc-ava" style="background:#fff0f1;color:var(--gold);">VD</div>
+                                <div>
+                                    <div class="tc-name">Varun Dhiman's </div>
+                                    <div class="tc-role">Student and Parent</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- SLIDE 3 -->
-                <div class="tc-card">
-                    <div class="tc-video">
-                        <div class="tc-num">03 / 05</div>
-                        <iframe src="https://www.youtube.com/embed/qmMxwANw8AI?rel=0&modestbranding=1"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-stars">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
+                    <!-- SLIDE 3 -->
+                    <div class="tc-card">
+                        <div class="tc-video">
+                            <div class="tc-num">03 / 05</div>
+                            <iframe src="https://www.youtube.com/embed/qmMxwANw8AI?rel=0&modestbranding=1"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         </div>
-                        <p class="tc-quote">"Hi everyone, I am Ronak from Maharashtra. I couldn't make it to government
-                            medical seats this year and was searching for admission guidance to secure a seat in good
-                            MBBS colleges. Then I came to know about Learntech consultancy and their expert service in
-                            admission guidance. Right from the day I contacted them, they helped me with every procedure
-                            on my behalf. I am very grateful to the Learntech consultancy, helping me to secure
-                            admission in one of the top colleges in Bangalore. It would not have been possible without
-                            your help. For all the students and parents who are worried about securing admission, I
-                            would recommend you to consult Learntech."</p>
-                        <div class="tc-divider"></div>
-                        <div class="tc-author">
-                            <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">R</div>
-                            <div>
-                                <div class="tc-name">Ronak's</div>
-                                <div class="tc-role">Student</div>
+                        <div class="tc-body">
+                            <div class="tc-stars">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p class="tc-quote">"Hi everyone, I am Ronak from Maharashtra. I couldn't make it to
+                                government
+                                medical seats this year and was searching for admission guidance to secure a seat in
+                                good
+                                MBBS colleges. Then I came to know about Learntech consultancy and their expert service
+                                in
+                                admission guidance. Right from the day I contacted them, they helped me with every
+                                procedure
+                                on my behalf. I am very grateful to the Learntech consultancy, helping me to secure
+                                admission in one of the top colleges in Bangalore. It would not have been possible
+                                without
+                                your help. For all the students and parents who are worried about securing admission, I
+                                would recommend you to consult Learntech."</p>
+                            <div class="tc-divider"></div>
+                            <div class="tc-author">
+                                <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">R</div>
+                                <div>
+                                    <div class="tc-name">Ronak's</div>
+                                    <div class="tc-role">Student</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- SLIDE 3 -->
-                <div class="tc-card">
-                    <div class="tc-video">
-                        <div class="tc-num">04 / 05</div>
-                        <iframe src="https://www.youtube.com/embed/Ekgpd8tPFJ8?si=Cv2jzh-jS0VLoCNJ"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-stars">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
+                    <!-- SLIDE 3 -->
+                    <div class="tc-card">
+                        <div class="tc-video">
+                            <div class="tc-num">04 / 05</div>
+                            <iframe src="https://www.youtube.com/embed/Ekgpd8tPFJ8?si=Cv2jzh-jS0VLoCNJ"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         </div>
-                        <p class="tc-quote">"Hello I’m Smriti Deo and I am from Bhopal (M.P). Thanks to the people from
-                            Bangalore Study . I have got admission in Cardiac Care Technology at Raja Rajeshwari Medical
-                            College. They have been really supportive and friendly. They made the whole process really
-                            simple and convenient to me. They literally take care of all the procedures and make it
-                            really simple and hence all the process is really smooth. Thanks to Megha Ma'am, she has
-                            been really supportive and cleared all my queries and confusion. I’m really glad that I
-                            chose this platform for my career Guidance. Thank you so much."</p>
-                        <div class="tc-divider"></div>
-                        <div class="tc-author">
-                            <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">SD</div>
-                            <div>
-                                <div class="tc-name">Smriti Deo's</div>
-                                <div class="tc-role">Student</div>
+                        <div class="tc-body">
+                            <div class="tc-stars">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p class="tc-quote">"Hello I’m Smriti Deo and I am from Bhopal (M.P). Thanks to the people
+                                from
+                                Bangalore Study . I have got admission in Cardiac Care Technology at Raja Rajeshwari
+                                Medical
+                                College. They have been really supportive and friendly. They made the whole process
+                                really
+                                simple and convenient to me. They literally take care of all the procedures and make it
+                                really simple and hence all the process is really smooth. Thanks to Megha Ma'am, she has
+                                been really supportive and cleared all my queries and confusion. I’m really glad that I
+                                chose this platform for my career Guidance. Thank you so much."</p>
+                            <div class="tc-divider"></div>
+                            <div class="tc-author">
+                                <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">SD</div>
+                                <div>
+                                    <div class="tc-name">Smriti Deo's</div>
+                                    <div class="tc-role">Student</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- SLIDE 3 -->
-                <div class="tc-card">
-                    <div class="tc-video">
-                        <div class="tc-num">05 / 05</div>
-                        <iframe src="https://www.youtube.com/embed/K7g_h2VJeKU?si=gRMQSMA7hSCnf8ia"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-stars">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
+                    <!-- SLIDE 3 -->
+                    <div class="tc-card">
+                        <div class="tc-video">
+                            <div class="tc-num">05 / 05</div>
+                            <iframe src="https://www.youtube.com/embed/K7g_h2VJeKU?si=gRMQSMA7hSCnf8ia"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         </div>
-                        <p class="tc-quote">"I am Nikam Jokhio and I am from Arunachal Pradesh. I came to Bangalore for
-                            my further studies. The course I opted for is B. Sc Anesthesia at Dr. B R Ambedkar Medical
-                            College and Hospital. Learntech helped me find the best college. I am really thankful to
-                            Learntech and especially to Pooja ma'am. She has helped and guided me throughout. The whole
-                            team was really friendly and I am really thankful to them.
-                            "</p>
-                        <div class="tc-divider"></div>
-                        <div class="tc-author">
-                            <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">NK</div>
-                            <div>
-                                <div class="tc-name">Nikam Jokhio's</div>
-                                <div class="tc-role">Student</div>
+                        <div class="tc-body">
+                            <div class="tc-stars">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p class="tc-quote">"I am Nikam Jokhio and I am from Arunachal Pradesh. I came to Bangalore
+                                for
+                                my further studies. The course I opted for is B. Sc Anesthesia at Dr. B R Ambedkar
+                                Medical
+                                College and Hospital. Learntech helped me find the best college. I am really thankful to
+                                Learntech and especially to Pooja ma'am. She has helped and guided me throughout. The
+                                whole
+                                team was really friendly and I am really thankful to them.
+                                "</p>
+                            <div class="tc-divider"></div>
+                            <div class="tc-author">
+                                <div class="tc-ava" style="background:#f0fff6;color:#1a7a4a;">NK</div>
+                                <div>
+                                    <div class="tc-name">Nikam Jokhio's</div>
+                                    <div class="tc-role">Student</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                </div>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="tc-controls">
+                <button class="tc-arrow" id="tcPrev">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+
+                <div class="tc-dots">
+                    <button class="tc-dot active" data-i="0"></button>
+                    <button class="tc-dot" data-i="1"></button>
+                    <button class="tc-dot" data-i="2"></button>
+                    <button class="tc-dot" data-i="3"></button>
+                    <button class="tc-dot" data-i="4"></button>
+                    <button class="tc-dot" data-i="5"></button>
                 </div>
 
+                <div class="tc-progress">
+                    <div class="tc-progress-fill" id="tcFill"></div>
+                </div>
+
+                <button class="tc-arrow" id="tcNext">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <!-- CONTROLS -->
-        <div class="tc-controls">
-            <button class="tc-arrow" id="tcPrev">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6" />
-                </svg>
-            </button>
-
-            <div class="tc-dots">
-                <button class="tc-dot active" data-i="0"></button>
-                <button class="tc-dot" data-i="1"></button>
-                <button class="tc-dot" data-i="2"></button>
-                <button class="tc-dot" data-i="3"></button>
-                <button class="tc-dot" data-i="4"></button>
-                <button class="tc-dot" data-i="5"></button>
-            </div>
-
-            <div class="tc-progress">
-                <div class="tc-progress-fill" id="tcFill"></div>
-            </div>
-
-            <button class="tc-arrow" id="tcNext">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6" />
-                </svg>
-            </button>
-        </div>
-    </div>
+    </section>
 
     <script>
         const track = document.getElementById('tcTrack');
@@ -2399,10 +2860,10 @@
             </div>
 
             <h2 class="cta-headline">
-                Let's Build Your <em>Future</em> <span class="red">Today</span>
+                Let's Build Your Future <span class="red">Today</span>
             </h2>
 
-            <p class="cta-sub">
+            <p class="cta-sub fs-3">
                 Know more about us
             </p>
 
@@ -2451,14 +2912,26 @@
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        CTA SECTION
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CTA SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         #cta {
-            background: linear-gradient(140deg, var(--gold) 0%, #162050eb 45%, var(--accent) 100%);
+            background:
+                linear-gradient(140deg,
+                    rgba(212, 55, 55, 0.6) 0%,
+                    rgba(22, 32, 80, 0.6) 45%,
+                    rgba(39, 72, 150, 0.491) 100%),
+                url("media/blue-red-background-with-leafy-border.jpg.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
             padding: 28px 0 26px;
             position: relative;
             overflow: hidden;
             text-align: center;
             margin: 40px;
-            border-radius: 60px 60px 60px 60px ;
+            border-radius: 60px;
         }
 
         /* grid lines */
@@ -2571,10 +3044,10 @@
 
         .cta-sub {
             font-size: 15px;
-            color: rgba(255, 255, 255, 0.58);
+            color: rgb(255, 255, 255);
             line-height: 1.75;
             max-width: 520px;
-            margin: 0 auto 44px;
+            margin: 0 auto 14px;
             opacity: 0;
             animation: riseIn 0.85s 0.3s ease forwards;
         }
@@ -2608,7 +3081,7 @@
         .h-label {
             font-size: 10px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.55);
+            color: rgb(255, 255, 255);
             letter-spacing: 0.8px;
             text-transform: uppercase;
             margin-bottom: 6px;
@@ -2630,7 +3103,7 @@
         }
 
         .h-input::placeholder {
-            color: rgba(255, 255, 255, 0.38);
+            color: rgba(255, 255, 255, 0.828);
         }
 
         .h-input:focus,
@@ -2772,92 +3245,346 @@
                 transform: translateX(4px)
             }
         }
+
+        @media (max-width: 768px) {
+            #cta {
+                margin: 20px 12px;
+                border-radius: 28px;
+                padding: 36px 0 32px;
+            }
+
+            .cta-headline {
+                font-size: clamp(28px, 8vw, 38px);
+            }
+
+            .cta-sub {
+                font-size: 14px;
+                margin-bottom: 28px;
+                padding: 0 16px;
+            }
+
+            .h-form {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                padding: 18px 16px;
+                border-radius: 14px;
+            }
+
+            .h-field {
+                flex: unset;
+                width: 100%;
+            }
+
+            .h-submit {
+                width: 100%;
+                padding: 14px;
+                font-size: 14px;
+                align-self: stretch;
+                margin-top: 4px;
+            }
+        }
     </style>
 
 
 
-
-
     <!-- ══ FOOTER ══ -->
-    <footer>
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <a class="navbar-brand" href="#">
-                        <img src="media/Leantech_logo.svg" alt="EduGuide"
-                            style="height: 90px; margin-right: 0.5rem;"></a>
-                    <div class="footer-tagline">We are a dedicated family of counsellors and ed-tech professionals
-                        turning career counselling for students into a clear, strategic roadmap which leads to academic
-                        and professional success.</div>
+    <footer id="site-footer">
+
+        <style>
+            #site-footer {
+                background: #ffffff;
+                padding: 1.5rem 0 0;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            #site-footer .footer-inner {
+                max-width: 1450px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+
+            #site-footer .footer-columns {
+                display: grid;
+                grid-template-columns: 1.6fr 0.9fr 1.5fr 1fr;
+                gap: 2.5rem;
+                padding-bottom: 2.5rem;
+            }
+
+            /* ── Logo ── */
+            #site-footer .footer-brand img {
+                height: 90px;
+                display: block;
+                margin-bottom: 1rem;
+            }
+
+            #site-footer .footer-slogan {
+                font-size: 0.83rem;
+                line-height: 1.8;
+                color: #555;
+                max-width: 370px;
+            }
+
+            /* ── Column heading ── */
+            #site-footer .footer-heading {
+                font-size: 0.72rem;
+                font-weight: 600;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: #0d0d0d;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 2px solid #274896;
+                display: inline-block;
+            }
+
+            /* ── Nav links ── */
+            #site-footer .footer-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+
+            #site-footer .footer-menu a {
+                color: #555;
+                text-decoration: none;
+                font-size: 0.86rem;
+                transition: color 0.2s;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            #site-footer .footer-menu a::before {
+                content: '';
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: #e43441;
+                flex-shrink: 0;
+                opacity: 0.6;
+            }
+
+            #site-footer .footer-menu a:hover {
+                color: #274896;
+            }
+
+            /* ── Contact ── */
+            #site-footer .footer-contact-list {
+                display: flex;
+                flex-direction: column;
+                gap: 0.35rem;
+            }
+
+            #site-footer .footer-contact-row {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                font-size: 0.83rem;
+                color: #555;
+                line-height: 1.6;
+            }
+
+            #site-footer .footer-contact-row a {
+                color: #555;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            #site-footer .footer-contact-row a:hover {
+                color: #e43441;
+            }
+
+            #site-footer .footer-contact-icon {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+
+            #site-footer .footer-contact-icon i {
+                font-size: 0.98rem;
+                color: var(--accent);
+            }
+
+            /* ── Social ── */
+            #site-footer .footer-socials {
+                display: flex;
+                gap: 0.65rem;
+                flex-wrap: wrap;
+                margin-top: 0.25rem;
+            }
+
+            #site-footer .footer-socials a {
+                width: 38px;
+                height: 38px;
+                border: 1.5px solid #0d0d0d;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #0d0d0d;
+                font-size: 1rem;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+
+            #site-footer .footer-socials a:hover {
+                border-color: #274896;
+                color: #fff;
+                background: #274896;
+            }
+
+            /* ── Divider & bottom bar ── */
+            #site-footer .footer-rule {
+                border: none;
+                border-top: 2px solid rgba(0, 0, 0, 0.217);
+                margin-bottom: 30px;
+            }
+
+            #site-footer .footer-bar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.2rem 0;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            #site-footer .footer-copyright {
+                font-size: 0.74rem;
+                color: #999;
+            }
+
+            #site-footer .footer-legal {
+                display: flex;
+                gap: 1.5rem;
+            }
+
+            #site-footer .footer-legal a {
+                font-size: 0.74rem;
+                color: #999;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            #site-footer .footer-legal a:hover {
+                color: #e43441;
+            }
+
+            /* ── Responsive ── */
+            @media (max-width: 900px) {
+                #site-footer .footer-columns {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                }
+            }
+
+            @media (max-width: 520px) {
+                #site-footer .footer-columns {
+                    grid-template-columns: 1fr;
+                    gap: 1.8rem;
+                }
+
+                #site-footer .footer-inner {
+                    padding: 0 1.2rem;
+                }
+
+                #site-footer .footer-bar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                #site-footer .footer-legal {
+                    gap: 1rem;
+                }
+            }
+        </style>
+
+        <div class="footer-inner">
+             <hr class="footer-rule">
+            <div class="footer-columns">
+
+                <!-- Brand -->
+                <div>
+                    <div class="footer-brand">
+                        <a href="#">
+                            <img src="media/Leantech_logo.svg" alt="LearnTech">
+                        </a>
+                    </div>
+                    <p class="footer-slogan">The path to your dream college is yours to walk, we just make sure you
+                        never miss a turn.
+                    </p>
                 </div>
-                <div class="col-lg-2 col-sm-4">
-                    <div
-                        style="font-size: 0.9rem;font-weight: 500;letter-spacing:.18em;text-transform:uppercase;color:#1a1612;margin-bottom:.8rem;">
-                        Navigate</div>
-                    <div style="display:flex;flex-direction:column;gap:.5rem;">
-                        <a href="#who" style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
-                            onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">Who We
-                            Are</a>
-                        <a href="#what"
-                            style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
-                            onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">What We
-                            Do</a>
-                        <a href="#services"
-                            style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
-                            onmouseover="this.style.color='#c8522a'"
-                            onmouseout="this.style.color='#1a1612'">Services</a>
-                        <a href="#stories"
-                            style="color:#1a1612;text-decoration:none;font-size:.82rem;transition:color .2s;"
-                            onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">Success
-                            Stories</a>
+
+                <!-- Navigate -->
+                <div>
+                    <div class="footer-heading">Navigate</div>
+                    <nav class="footer-menu">
+                        <a href="#who">Who We Are</a>
+                        <a href="#what">What We Do</a>
+                        <a href="#services">Services</a>
+                        <a href="#testi">Success Stories</a>
+                    </nav>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <div class="footer-heading">Contact</div>
+                    <div class="footer-contact-list">
+                        <div class="footer-contact-row">
+                            <div class="footer-contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                            <span>#80 (4), 'D' Main Rd, East End, 9th Block,
+                                Jayanagar, Bangalore, Karnataka - 560041
+                                Monday to Saturday | 9am to 6pm
+                            </span>
+                        </div>
+                        <div class="footer-contact-row">
+                            <div class="footer-contact-icon"><i class="bi bi-envelope-fill"></i></div>
+                            <a href="mailto:info@learntechww.com">info@learntechww.com</a>
+                        </div>
+                        <div class="footer-contact-row">
+                            <div class="footer-contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                            <a href="tel:18001208696">1800 120 8696</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-4">
-                    <div
-                        style="font-size:.9rem;letter-spacing:.18em;text-transform:uppercase;color:#1a1612;margin-bottom:.8rem; font-weight: 500;">
-                        Contact</div>
-                    <div style="font-size:.82rem;line-height:1.9;color:#1a1612;">
-                        #80 (4), 'D' Main Rd, East End, 9th Block,<br>
-                        Jayanagar, Bangalore, Karnataka - 560041<br>
-                        Mon–Sat, 9am – 6pm IST<br>
-                        <a href="mailto:info@learntechww.com" style="color:#1a1612;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">info@learntechww.com</a><br>
-                        <a href="tel:1800120869" style="color:#1a1612;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#c8522a'" onmouseout="this.style.color='#1a1612'">1800 120 8696</a><br>
-                        
+
+                <!-- Follow -->
+                <div>
+                    <div class="footer-heading">Follow</div>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/learntechedus" target="_blank" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w" target="_blank"
+                            aria-label="YouTube">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/" target="_blank"
+                            aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-4">
-                    <div
-                        style="font-size:.9rem; font-weight: 500; letter-spacing:.18em;text-transform:uppercase;color:#1a1612;margin-bottom:.8rem;">
-                        Follow</div>
-                    <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
-                        <a href="https://www.instagram.com/learntechedus"
-                            style="width:36px;height:36px;border:1px solid rgb(0, 0, 0);border-radius:2px;display:flex;align-items:center;justify-content:center;color:#1a1612;text-decoration:none;transition:all .2s;font-size:.95rem;"
-                            onmouseover="this.style.borderColor='#c8522a';this.style.color='#c8522a'"
-                           ><i
-                                class="bi bi-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCZP40_ivVcdelNOVhmQFr7w"
-                            style="width:36px;height:36px;border:1px solid rgb(0, 0, 0);border-radius:2px;display:flex;align-items:center;justify-content:center;color:#1a1612;text-decoration:none;transition:all .2s;font-size:.95rem;"
-                            onmouseover="this.style.borderColor='#c8522a';this.style.color='#c8522a'"
-                           ><i
-                                class="bi bi-youtube"></i></a>
-                        <a href="https://www.linkedin.com/company/learntech-edu-solutions-pvt-ltd/"
-                            style="width:36px;height:36px;border:1px solid rgb(0, 0, 0);border-radius:2px;display:flex;align-items:center;justify-content:center;color:#1a1612;text-decoration:none;transition:all .2s;font-size:.95rem;"
-                            onmouseover="this.style.borderColor='#c8522a';this.style.color='#c8522a'"
-                           ><i
-                                class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
+
             </div>
 
-            <!-- <hr class="footer-divider" />
-            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <div class="footer-copy">© 2025 EduGuide. All rights reserved.</div>
-                <div class="footer-links">
+           
+
+            <div class="footer-bar">
+                <span class="footer-copyright">&copy; 2025 LearnTech Edu Solutions Pvt. Ltd. All rights reserved.</span>
+                <div class="footer-legal">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Use</a>
                 </div>
-            </div> -->
+            </div>
+
         </div>
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
