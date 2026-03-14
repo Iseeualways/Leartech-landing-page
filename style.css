@@ -141,7 +141,7 @@
     align-items: center;
     background:
         linear-gradient(40deg, rgb(255, 255, 255), rgba(255,255,255,0) 60%),
-        url('media/ChatGPT\ Image\ Mar\ 12\,\ 2026\,\ 04_33_06\ PM.jpg.jpeg');
+        url('media/Img-BG.webp');
     background-size: cover;
     /* background-position: center; */
     /* background-repeat: no-repeat; */
@@ -1180,6 +1180,7 @@
       line-height: 1.7;
   }
 
+
   /* CAROUSEL */
   .carousel-wrap {
       position: relative;
@@ -1389,7 +1390,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(14, 52, 118, 0.221);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.25);
@@ -1412,11 +1413,11 @@
   }
 
   .arrow-prev {
-      left: 2rem;
+      left: 0.5rem;
   }
 
   .arrow-next {
-      right: 2rem;
+      right: 0.5rem;
   }
 
   /* DOTS */
@@ -1800,7 +1801,7 @@
               rgba(212, 55, 55, 0.6) 0%,
               rgba(22, 32, 80, 0.6) 45%,
               rgba(39, 72, 150, 0.491) 100%),
-          url("media/blue-red-background-with-leafy-border.jpg.jpeg");
+          url("media/Img-BG_02.webp");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -2460,12 +2461,6 @@
       transform: translateY(-40px) scale(.88);
       opacity: .4;
       z-index: 1;
-  }
-
-  .scard[data-pos="3"] {
-      transform: translateY(-50px) scale(.84);
-      opacity: 0;
-      z-index: 0;
   }
 
   .nav {

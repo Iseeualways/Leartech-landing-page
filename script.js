@@ -173,13 +173,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 })();
 
-
 let cur = 0;
 const cards = [...document.querySelectorAll('.scard')];
 const dots = [...document.querySelectorAll('.ndot')];
 function go(n) {
-    cur = (n + 4) % 4;
-    cards.forEach((c, i) => { const p = (i - cur + 4) % 4; c.dataset.pos = p > 3 ? 3 : p; });
+    cur = (n + 3) % 3;
+    cards.forEach((c, i) => { 
+        const p = (i - cur + 3) % 3; 
+        c.dataset.pos = p > 2 ? 2 : p; 
+    });
     dots.forEach((d, i) => d.classList.toggle('on', i === cur));
 }
 cards.forEach(c => c.onclick = () => { if (+c.dataset.pos > 0) go(+c.dataset.i); });
