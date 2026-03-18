@@ -165,6 +165,114 @@
       animation: fadeUp 0.7s 0.2s ease forwards;
   }
 
+  /* ===================================================================================================================================== */
+  
+.eyebrow-glass-live {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow: 
+        0 8px 30px rgba(0,0,0,0.2),
+        inset 0 0 20px rgba(255,255,255,0.05);
+
+    overflow: hidden;
+
+    animation: softBlink 3s infinite ease-in-out;
+}
+
+/* TEXT */
+.eyebrow-glass-live .text {
+    color: #012683;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+}
+
+/* FLICKERING DOT */
+.eyebrow-glass-live .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c54822;
+
+    box-shadow: 0 0 8px #004c94;
+
+    animation: dotFlicker 1.2s infinite;
+}
+
+/* DOT ANIMATION */
+@keyframes dotFlicker {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 6px var(--accent);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+        box-shadow: 0 0 2px var(--accent);
+    }
+}
+
+/* SOFT BLINK (very subtle) */
+@keyframes softBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.92;
+    }
+}
+
+/* GLOW MOVEMENT */
+.eyebrow-glass-live::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.63), transparent 70%);
+    top: -40px;
+    left: -40px;
+    filter: blur(30px);
+    animation: glowMove 6s infinite alternate ease-in-out;
+}
+
+/* BORDER SHINE */
+.eyebrow-glass-live::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.575), transparent);
+    opacity: 0.2;
+    animation: shineMove 4s infinite;
+}
+
+@keyframes glowMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 20px); }
+}
+
+@keyframes shineMove {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+
+
+
+
+
   .hero-eyebrow::before {
       content: '';
       display: inline-block;
@@ -208,6 +316,7 @@
       color: var(--ink);
       line-height: 1.6;
       margin-bottom: 1.2rem;
+      font-weight: 700;
       font-style: italic;
       opacity: 0;
       animation: fadeUp 0.7s 0.5s ease forwards;
@@ -2247,16 +2356,10 @@
       flex-direction: column;
       gap: 0.35rem;
   }
-
-  #site-footer .ft-contact-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.83rem;
-      color: #2a2a2a;
-      line-height: 1.6;
-  }
-
+#site-footer .ft-contact-row {
+    font-size: 0.88rem;
+    font-weight: 400;
+}
   #site-footer .ft-contact-row a {
       color: #2a2a2a;
       text-decoration: none;
@@ -2266,17 +2369,20 @@
   #site-footer .ft-contact-row a:hover {
       color: #e43441;
   }
+#site-footer .ft-contact-row {
+    display: flex;
+    align-items: flex-start; /* important */
+    gap: 10px;
+}
 
-  #site-footer .ft-contact-icon {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-  }
-
+#site-footer .ft-contact-icon {
+    width: 24px;
+    min-width: 24px;
+    display: flex;
+    align-items: flex-start;   /* key change */
+    justify-content: center;
+    margin-top: 1px; /* adjust this (2px–4px based on font) */
+}
   #site-footer .ft-contact-icon i {
       font-size: 0.98rem;
       color: var(--accent);
