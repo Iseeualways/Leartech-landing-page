@@ -166,28 +166,22 @@
   }
 
   /* ===================================================================================================================================== */
-  
-.eyebrow-glass-live {
+  .eyebrow-glass-live {
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 18px;
+    padding: 4px 16px;
     border-radius: 999px;
 
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.541);
+    backdrop-filter: blur(10px);
 
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
-    box-shadow: 
-        0 8px 30px rgba(0,0,0,0.2),
-        inset 0 0 20px rgba(255,255,255,0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 
-    overflow: hidden;
-
-    animation: softBlink 3s infinite ease-in-out;
+    animation: shakeLoop 2s infinite;
 }
 
 /* TEXT */
@@ -195,82 +189,49 @@
     color: #012683;
     font-size: 18px;
     font-weight: 600;
-    letter-spacing: 0.1px;
 }
 
-/* FLICKERING DOT */
+/* DOT */
 .eyebrow-glass-live .dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: #c54822;
-
-    box-shadow: 0 0 8px #004c94;
+    background: var(--gold);
 
     animation: dotFlicker 1.2s infinite;
 }
 
-/* DOT ANIMATION */
+/* DOT FLICKER */
 @keyframes dotFlicker {
     0%, 100% {
         opacity: 1;
         transform: scale(1);
-        box-shadow: 0 0 6px var(--accent);
     }
     50% {
         opacity: 0.4;
         transform: scale(0.8);
-        box-shadow: 0 0 2px var(--accent);
     }
 }
 
-/* SOFT BLINK (very subtle) */
-@keyframes softBlink {
-    0%, 100% {
-        opacity: 1;
+/* 🔥 SHAKE (2 times every 2 sec) */
+@keyframes shakeLoop {
+    0%, 80%, 100% {
+        transform: translateX(0);
     }
-    50% {
-        opacity: 0.92;
+
+    85% {
+        transform: translateX(-2px);
+    }
+    88% {
+        transform: translateX(2px);
+    }
+    91% {
+        transform: translateX(-2px);
+    }
+    94% {
+        transform: translateX(2px);
     }
 }
-
-/* GLOW MOVEMENT */
-.eyebrow-glass-live::before {
-    content: "";
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.63), transparent 70%);
-    top: -40px;
-    left: -40px;
-    filter: blur(30px);
-    animation: glowMove 6s infinite alternate ease-in-out;
-}
-
-/* BORDER SHINE */
-.eyebrow-glass-live::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 999px;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.575), transparent);
-    opacity: 0.2;
-    animation: shineMove 4s infinite;
-}
-
-@keyframes glowMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(40px, 20px); }
-}
-
-@keyframes shineMove {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-
-
-
 
 
   .hero-eyebrow::before {
