@@ -171,7 +171,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 4px 16px;
+    padding: 1px 16px;
     border-radius: 999px;
 
     background: rgba(255, 255, 255, 0.541);
@@ -220,16 +220,16 @@
     }
 
     85% {
-        transform: translateX(-2px);
+        transform: translateX(-3px);
     }
     88% {
-        transform: translateX(2px);
+        transform: translateX(3px);
     }
     91% {
-        transform: translateX(-2px);
+        transform: translateX(-3px);
     }
     94% {
-        transform: translateX(2px);
+        transform: translateX(3px);
     }
 }
 
@@ -2031,7 +2031,7 @@
   }
 
   .h-label {
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 600;
       color: rgb(255, 255, 255);
       letter-spacing: 0.8px;
@@ -2049,13 +2049,13 @@
       background: rgba(255, 255, 255, 0.08);
       font-family: 'Sora', sans-serif;
       font-size: 13px;
-      color: #fff;
+      color: #ffffff;
       outline: none;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   }
 
   .h-input::placeholder {
-      color: rgba(255, 255, 255, 0.828);
+      color: rgba(255, 255, 255, 0.575);
   }
 
   .h-input:focus,
