@@ -186,3 +186,20 @@ function go(n) {
 }
 cards.forEach(c => c.onclick = () => { if (+c.dataset.pos > 0) go(+c.dataset.i); });
 setInterval(() => go(cur + 1), 4000);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const faqs = document.querySelectorAll(".faq-right details");
+
+    faqs.forEach((faq) => {
+        faq.addEventListener("toggle", function () {
+            if (this.open) {
+                faqs.forEach((item) => {
+                    if (item !== this) {
+                        item.removeAttribute("open");
+                    }
+                });
+            }
+        });
+    });
+});
